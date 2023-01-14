@@ -1,11 +1,11 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage('so-cart');
 
   const htmlItems = cartItemTemplate(cartItems);
 
-  document.querySelector(".product-list").innerHTML = htmlItems;
+  document.querySelector('.product-list').innerHTML = htmlItems;
 }
 
 function cartItemTemplate(item) {
