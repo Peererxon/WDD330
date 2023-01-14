@@ -3,9 +3,10 @@ import { getLocalStorage } from './utils.mjs';
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
 
-  const htmlItems = cartItemTemplate(cartItems);
-
-  document.querySelector('.product-list').innerHTML = htmlItems;
+  cartItems.forEach((cartItem)=>{
+    const htmlItem = cartItemTemplate(cartItem);
+    document.querySelector('.product-list').innerHTML += htmlItem;
+  })
 }
 
 function cartItemTemplate(item) {
