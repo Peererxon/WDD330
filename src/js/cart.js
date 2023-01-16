@@ -28,4 +28,14 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+export function reRenderCartContents() {
+  const cartCards = document.querySelectorAll('.cart-card');
+
+  cartCards.forEach((card) => {
+    card.remove();
+  });
+
+  renderCartContents();
+}
+
 renderCartContents();
