@@ -22,9 +22,20 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <span data-id="${item.Id}" class="removeFromCart">X</span>
 </li>`;
 
   return newItem;
+}
+
+export function reRenderCartContents() {
+  const cartCards = document.querySelectorAll('.cart-card');
+
+  cartCards.forEach((card) => {
+    card.remove();
+  });
+
+  renderCartContents();
 }
 
 renderCartContents();
