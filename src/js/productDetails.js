@@ -1,20 +1,17 @@
 
 //fetch json
-async function getProductData(name){
-
-    // --------- Change this when more product get added -------------------------------
-    let response = await fetch('../json/tents.json');
-    // ---------------------------------------------------------------------------------
-
+async function getProductData(id, category){
+    let response = await fetch(`../json/${category}.json`);
     if (response.ok){
         let result = await response.json();
+        // Same thing as array.find
         for(let i = 0; i < result.length; i++){
-            if (result[i]['Id'] == name)
+            if (result[i]['Id'] == id)
                 return result[i];
         }
     }
-    // If not found, return an empty object
-    return {}
+    // If not found, return null
+    return
 }
 
 //plug in all the values according to the json
@@ -50,8 +47,9 @@ function insertProductInfo(productInfo){
 async function init(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const productName = urlParams.get('product')
-    let productData = await getProductData(productName);
+    const productId = urlParams.get('product');
+    let productCategory = urlParams.get('category');
+    let productData = await getProductData(productId, productCategory);
 
     insertProductInfo(productData);
 }
