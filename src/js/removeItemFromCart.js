@@ -30,3 +30,4 @@ async function removeCartHandler(e) {
 }
 
 addRemoveEvent();
+// Clicking the X buton will remove all tents of the same id, which looks wierd on the page, but they probably shouldn't have been added in the first place.
