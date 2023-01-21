@@ -43,7 +43,7 @@ function insertProductInfo(productInfo){
     let productDescriptionObject = document.querySelector('#product-description');
     productDescriptionObject.innerHTML = productInfo['DescriptionHtmlSimple'];
 
-    let buttonCartObject = document.querySelector('addToCart');
+    let buttonCartObject = document.querySelector('#addToCart');
     // Use setAttribute because of the minus symbol in data-id
     buttonCartObject.setAttribute('data-id', productInfo['Id']);
 }
