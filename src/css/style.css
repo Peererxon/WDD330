@@ -224,3 +224,12 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.productListPrice{
+  color: #aa0000;
+  text-decoration: line-through;
+}
+
+.productFinalPrice{
+  color: #008800;
+}
