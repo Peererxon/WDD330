@@ -1,9 +1,9 @@
 
-async function createCard(data){
+async function createCard(data, category){
     let newCard = document.createElement("li");
     let cardLink = document.createElement("a");
     // Put in code here for the link
-    cardLink.href = "";
+    cardLink.href = `../product_pages/index.html?product=${data['Id']}&category=${category}`;
     let cardImage = document.createElement("img");
     let response = await fetch(data["Image"]);
     if (!response.ok){
@@ -34,7 +34,7 @@ async function createCard(data){
     cardLink.appendChild(cardPrice);
 
     newCard.appendChild(cardLink);
-    newCard.class = "product-card";
+    newCard.classList.add("product-card");
     return newCard;
 }
 
@@ -48,7 +48,7 @@ async function addCards(numCards, type){
             // I would use a forEach here but the callback screws with the async/await
              for (let i = 0; i < result.length; i+= 1){
                 try{
-                    cards.push(await createCard(result[i]));
+                    cards.push(await createCard(result[i], type));
                 }catch{
                     // Don't need to do anything
                 }
@@ -57,7 +57,7 @@ async function addCards(numCards, type){
             /*cards.sort((card) =>{
                 return -1 for the item to be first, and 1 to be last. 
             })*/
-            for (let i = 0; i < cards.length && cardsFinished < 4; i++){
+            for (let i = 0; i < cards.length && cardsFinished < numCards; i++){
             
                 container.appendChild(cards[i]);
                 cardsFinished += 1;
@@ -66,7 +66,7 @@ async function addCards(numCards, type){
         
 }
 
-let NUMCARDS = 1;
+let NUMCARDS = 4;
 let PRODUCT_TYPE = "tents";
 // Change these parameters to get different types of products, or different cards.
 // Product type should be the name of the file, minus the file extension. (Needs to be a .json!)
