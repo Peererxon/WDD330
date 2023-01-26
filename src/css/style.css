@@ -109,7 +109,17 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-
+.cart:after {
+  content: '12';
+  font-size: 12px;
+  background: #e7b481;
+  color: #502485;
+  border-radius: 50%;
+  padding: 3px;
+  position: relative;
+  left: -20px;
+  top: -20px;
+}
 /* End cart icon styles */
 
 .mission {
@@ -225,11 +235,11 @@ footer {
   padding: 1em;
 }
 
-.productListPrice{
+.productListPrice {
   color: #aa0000;
   text-decoration: line-through;
 }
 
-.productFinalPrice{
+.productFinalPrice {
   color: #008800;
 }
