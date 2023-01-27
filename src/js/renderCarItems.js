@@ -4,6 +4,6 @@ const cart = document.querySelector('#cart-items');
 
 const cartItems = getLocalStorage('so-cart');
 
-const cartItemsCounter = cartItems.length;
-
-cart.textContent = cartItemsCounter;
+if (cartItems) {
+  cart.textContent = cartItems.length;
+}
