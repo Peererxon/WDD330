@@ -55,6 +55,7 @@
             <text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text> -->
           </svg>
         </a>
+        <span id="cart-items">0</span>
       </div>
     </header>
 
@@ -64,20 +65,13 @@
 
         <h2 id="product-name" class="divider"></h2>
 
-        <img
-          id="product-img"
-          class="divider"
-          src=""
-          alt=""
-        />
+        <img id="product-img" class="divider" src="" alt="" />
 
         <p id="product-card-price" class="product-card__price"></p>
 
         <p id="product-color" class="product__color"></p>
 
-        <p id="product-description" class="product__description">
-          
-        </p>
+        <p id="product-description" class="product__description"></p>
 
         <div class="product-detail__add">
           <button id="addToCart" data-id="">Add to Cart</button>
@@ -87,5 +81,6 @@
 
     <footer>&copy;NOT a real business</footer>
     <script src="../js/productDetails.js"></script>
+    <script src="../js/renderCarItems.js" type="module"></script>
   </body>
 </html>
