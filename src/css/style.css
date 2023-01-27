@@ -109,8 +109,8 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.cart:after {
-  content: '12';
+
+#cart-items {
   font-size: 12px;
   background: #e7b481;
   color: #502485;
