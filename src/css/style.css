@@ -176,6 +176,12 @@ button {
   width: 100%;
 }
 
+.alert{
+  position:fixed;
+  top: 30px;
+  padding: 5px;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
