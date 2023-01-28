@@ -91,6 +91,9 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+button:hover{
+  background-color: var(--dark-grey);
+}
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -119,6 +122,26 @@ button {
   position: relative;
   left: -20px;
   top: -20px;
+}
+
+.cart-animate{
+  animation-name: backpackChangeColor;
+  animation-timing-function: ease-in;
+  animation-duration: 2000ms;
+  animation-delay: 0ms;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+}
+@keyframes backpackChangeColor{
+  from{
+    fill:black;
+  }
+  10%{
+    fill:#d59656;
+  }
+  to{
+    fill:black;
+  }
 }
 /* End cart icon styles */
 
@@ -243,3 +266,9 @@ footer {
 .productFinalPrice {
   color: #008800;
 }
+
+#addToCart.button-clicked{
+  /*Feel free to play around with this value*/
+  background-color: var(--tertiary-color);
+}
+

@@ -43,6 +43,13 @@ function insertProductInfo(productInfo){
     let buttonCartObject = document.querySelector('#addToCart');
     // Use setAttribute because of the minus symbol in data-id
     buttonCartObject.setAttribute('data-id', productInfo['Id']);
+    buttonCartObject.addEventListener('click', (e)=>{
+        document.querySelector(".cart svg").classList.add("cart-animate");
+        setTimeout(()=>{
+            document.querySelector(".cart svg").classList.remove("cart-animate");
+        }, 2000)
+        buttonCartObject.classList.add("button-clicked");
+    })
 }
 async function init(){
     const queryString = window.location.search;
