@@ -27,10 +27,22 @@ async function createCard(data, category){
 
     let cardPrice = document.createElement("p");
     if (data["ListPrice"] != data["FinalPrice"]){
-        // TODO: handle sales. This is a card on the board.
+        let span1 = document.createElement("span");
+        let span2 = document.createElement("span");
+        let span3 = document.createElement("span");
+        span1.textContent = data["ListPrice"];
+        span1.classList.add("productListPrice");
+        span2.textContent = data["FinalPrice"];
+        span2.classList.add("productFinalPrice");
+        let percentoff = Math.round((1- (data["FinalPrice"] / data["ListPrice"]))*100);
+        span3.textContent = ` ${percentoff}% off!`
+        cardPrice.appendChild(span1);
+        cardPrice.appendChild(span2);
+        cardPrice.appendChild(span3);
+    }else{
+        cardPrice.textContent = data["FinalPrice"];
     }
     cardPrice.classList.add("product-card__price");
-    cardPrice.textContent = data["FinalPrice"];
     cardLink.appendChild(cardPrice);
 
     newCard.appendChild(cardLink);
