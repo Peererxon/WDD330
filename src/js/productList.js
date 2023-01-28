@@ -1,28 +1,3 @@
-const pro = {
-  Id: '880RR',
-  NameWithoutBrand: 'Ajax Tent - 3-Person, 3-Season',
-  Name: 'Marmot Ajax Tent - 3-Person, 3-Season',
-  Image:
-    '../images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg',
-
-  SizesAvailable: {},
-  Colors: [
-    {
-      ColorCode: '01',
-      ColorName: 'Pale Pumpkin/Terracotta'
-    }
-  ],
-  DescriptionHtmlSimple:
-    'Get out and enjoy nature with Marmot&#39;s Ajax tent, featuring a smart design with durable, waterproof construction and two doors for easy access.',
-  SuggestedRetailPrice: 300.0,
-  Brand: {
-    Id: '1308',
-    LogoSrc: '../images/logos/marmot-160x100.jpg',
-    Name: 'Marmot'
-  },
-  ListPrice: 199.99,
-  FinalPrice: 199.99
-};
 export default class ProductListing {
   constructor(numCards, category, dataSource, listElement) {
     // We passed in this information to make our class as reusable as possible.
@@ -52,12 +27,11 @@ export default class ProductListing {
     </li>`;
   }
 
-  async addCards() {
+  async addCards(list) {
     let container = document.querySelector('.product-list');
 
     for (let index = 0; index < this.numCards; index++) {
-      const card = await this.productCardTemplate(pro);
-
+      const card = await this.productCardTemplate(list[index]);
       container.insertAdjacentHTML('beforeEnd', card);
     }
   }
