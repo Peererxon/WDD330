@@ -1,5 +1,8 @@
 import ProductListing from './productList.js';
+import ProductData from './ProductData.mjs';
 
-const productListing = new ProductListing('test', 'test', 'test,');
+const dataSource = new ProductData('tents');
 
-productListing.addCards(4, 'tents');
+const productListing = new ProductListing(4, 'tents', dataSource, 'test,');
+
+productListing.init();
