@@ -10,8 +10,12 @@ export default class ProductListing {
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
     const list = await this.dataSource.getData();
+
+    // Week 4 stretch Goals #2, remove extras products
+    const filteredList = this.filterList(list);
+
     // render the list
-    this.addCards(list);
+    this.addCards(filteredList);
   }
 
   async productCardTemplate(product) {
@@ -25,6 +29,16 @@ export default class ProductListing {
       <h2 class="card__name">${product.Name}</h2>
       <p class="product-card__price">$${product.FinalPrice}</p></a>
     </li>`;
+  }
+
+  filterList(list) {
+    let filteredItems = [];
+
+    for (let index = 0; index < this.numCards; index++) {
+      filteredItems.push(list[0]);
+    }
+
+    return filteredItems;
   }
 
   async addCards(list) {
