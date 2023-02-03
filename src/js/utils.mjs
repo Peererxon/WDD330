@@ -15,9 +15,35 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML('afterbegin', template);
+  //if there is a callback...call it and pass data
+  if (callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+// function to dynamically load the header and footer into a page
+export async function loadHeaderFooter() {
+  //select container
+  const headerElement = document.querySelector('#main-header');
+
+  // loading html and parsing it from html to text
+  const headerTemplate = await loadTemplate('../partials/header.html');
+
+  // inserting the text into the container
+  renderWithTemplate(headerTemplate, headerElement);
 }
