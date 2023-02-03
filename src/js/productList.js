@@ -35,7 +35,7 @@ export default class ProductListing {
     let filteredItems = [];
 
     for (let index = 0; index < this.numCards; index++) {
-      filteredItems.push(list[0]);
+      filteredItems.push(list[index]);
     }
 
     return filteredItems;
