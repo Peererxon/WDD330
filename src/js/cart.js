@@ -1,5 +1,5 @@
 import { getLocalStorage } from './utils.mjs';
-
+import { setLocalStorage } from './utils.mjs';
 export default class cartItem{
   constructor(){
     this.valid = false;
@@ -21,6 +21,29 @@ export default class cartItem{
     card.classList.add("cart-card");
     card.innerHTML = this.cartItemTemplate();
     document.querySelector('.product-list').appendChild(card);
+
+    // Add the button event listener to remove the item from the cart
+    document.querySelectorAll(".removeFromCart").forEach((node)=>{
+      node.addEventListener('click', (e)=>{
+        let id = e.target.getAttribute('data-id');
+        let items = cartItem.getItemsFromLocalStorage();
+        let itemData = [];
+        let newItems = [];
+        items.forEach((item)=>{
+          if (item.Id != id){
+            newItems.push(item)
+          }
+        })
+        newItems.forEach((item)=>{
+          itemData.push(item.data)
+        })
+        setLocalStorage('so-cart', itemData);
+        cartItem.reRenderCartContents(newItems);
+        cartItem.updateBackpack();
+    })
+    // End remove item from cart
+
+    })
   }
   cartItemTemplate() {
     if (!this.valid){
@@ -53,13 +76,16 @@ export default class cartItem{
     return cartItems;
   }
   static reRenderCartContents(items) {
-    const cartCards = document.querySelectorAll('.cart-card');
-  
-    cartCards.forEach((card) => {
-      card.remove();
-    });
-  
-    items.forEach(renderThisItem);
+    document.querySelector(".product-list").innerHTML = "";
+    for (let i = 0; i < items.length; i++){
+      items[i].renderThisItem();
+    }
+  }
+
+  static updateBackpack(){
+    // Update this when one order of multiple quantities is added
+    const storage = getLocalStorage('so-cart');
+    document.querySelector("#cart-items").textContent = storage.length;
   }
 
 }
