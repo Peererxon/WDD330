@@ -40,10 +40,12 @@ async function loadTemplate(path) {
 export async function loadHeaderFooter() {
   //select container
   const headerElement = document.querySelector('#main-header');
+  const footerElement = document.querySelector('#main-footer');
 
   // loading html and parsing it from html to text
   const headerTemplate = await loadTemplate('../partials/header.html');
-
+  const footerTemplate = await loadTemplate('../partials/footer.html');
   // inserting the text into the container
   renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
 }
