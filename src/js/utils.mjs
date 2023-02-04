@@ -1,3 +1,5 @@
+import {updateBackpack} from './cart.js';
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -48,4 +50,5 @@ export async function loadHeaderFooter() {
   // inserting the text into the container
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+  updateBackpack();
 }

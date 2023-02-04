@@ -1,6 +1,7 @@
 import { getLocalStorage } from './utils.mjs';
 import { setLocalStorage } from './utils.mjs';
-export default class cartItem{
+
+export class cartItem{
   constructor(){
     this.valid = false;
   }
@@ -39,7 +40,7 @@ export default class cartItem{
         })
         setLocalStorage('so-cart', itemData);
         cartItem.reRenderCartContents(newItems);
-        cartItem.updateBackpack();
+        updateBackpack();
     })
     // End remove item from cart
 
@@ -81,15 +82,10 @@ export default class cartItem{
       items[i].renderThisItem();
     }
   }
-
-  static updateBackpack(){
-    // Update this when one order of multiple quantities is added
-    const storage = getLocalStorage('so-cart');
-    document.querySelector("#cart-items").textContent = storage.length;
-  }
-
 }
-let items = cartItem.getItemsFromLocalStorage();
-for (let i = 0; i < items.length; i++){
-  items[i].renderThisItem();
+
+export function updateBackpack(){
+  // Update this when one order of multiple quantities is added
+  const storage = getLocalStorage('so-cart');
+  document.querySelector("#cart-items").textContent = storage.length;
 }
