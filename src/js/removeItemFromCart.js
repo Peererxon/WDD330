@@ -1,5 +1,5 @@
 import { setLocalStorage, getLocalStorage } from './utils.mjs';
-import { reRenderCartContents } from './cart';
+import cartItem from './cart';
 
 const addRemoveEvent = () => {
   // remove listener to Add to Cart button
@@ -14,18 +14,22 @@ const addRemoveEvent = () => {
 async function removeCartHandler(e) {
   const itemId = e.target.getAttribute('data-id');
 
-  const items = getLocalStorage('so-cart');
+  let items = cartItem.getItemsFromLocalStorage();
 
   if (!items) {
     return;
   }
 
-  const newItems = items.filter((item) => item.Id !== itemId);
+  let newItems = [];
+  for (let i = 0; i < items.length; i++){
+    if (items[i].data == itemId){
+      newItems.push(items[i].data)
+    }
+  }
 
   setLocalStorage('so-cart', newItems);
-
-  reRenderCartContents();
-
+  let cards = cartItem.getItemsFromLocalStorage();
+  cartItem.reRenderCartContents(cards);
   addRemoveEvent();
 }
 
