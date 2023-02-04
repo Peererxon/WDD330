@@ -243,3 +243,7 @@ footer {
 .productFinalPrice {
   color: #008800;
 }
+
+.hide {
+  display: none;
+}
