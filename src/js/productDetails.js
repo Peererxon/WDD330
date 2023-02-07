@@ -44,10 +44,15 @@ function insertProductInfo(productInfo) {
   buttonCartObject.setAttribute('data-id', productInfo['Id']);
   buttonCartObject.addEventListener('click', ()=>{
     // Change this when we let you add multiple of an item to the cart
-  const cartItemsNumber = document.querySelector("#cart-items")
-  let number = cartItemsNumber.textContent * 1;
-  number += 1;
-  cartItemsNumber.textContent = number;
+    const cartItemsNumber = document.querySelector("#cart-items")
+    let number = cartItemsNumber.textContent * 1;
+    number += 1;
+    cartItemsNumber.textContent = number;
+    document.querySelector(".cart svg").classList.add("cart-animate");
+    setTimeout(()=>{
+        document.querySelector(".cart svg").classList.remove("cart-animate");
+        }, 2000)
+        buttonCartObject.classList.add("button-clicked");
   })
 }
 async function init() {
