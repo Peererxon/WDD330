@@ -272,3 +272,7 @@ footer {
   background-color: var(--tertiary-color);
 }
 
+.hide {
+  display: none;
+}
+
