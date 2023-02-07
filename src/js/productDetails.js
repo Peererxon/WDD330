@@ -1,3 +1,4 @@
+
 //fetch json
 async function getProductData(id, category) {
   let response = await fetch(`../json/${category}.json`);
@@ -41,6 +42,13 @@ function insertProductInfo(productInfo) {
   let buttonCartObject = document.querySelector('#addToCart');
   // Use setAttribute because of the minus symbol in data-id
   buttonCartObject.setAttribute('data-id', productInfo['Id']);
+  buttonCartObject.addEventListener('click', ()=>{
+    // Change this when we let you add multiple of an item to the cart
+  const cartItemsNumber = document.querySelector("#cart-items")
+  let number = cartItemsNumber.textContent * 1;
+  number += 1;
+  cartItemsNumber.textContent = number;
+  })
 }
 async function init() {
   const queryString = window.location.search;
