@@ -19,16 +19,23 @@ export default class ProductListing {
   }
 
   async productCardTemplate(product) {
-    return `<li class="product-card">
-      <a href="product_pages/index.html?product=${product.Id}&category=tents">
-      <img
-        src="/tents/${product.Image}"
-        alt="Image of ${product.Name}"
-      />
-      <h3 class="card__brand">${product.Brand.Name}</h3>
-      <h2 class="card__name">${product.Name}</h2>
-      <p class="product-card__price">$${product.FinalPrice}</p></a>
-    </li>`;
+    let templateString = `<li class="product-card">
+    <a href="product_pages/index.html?product=${product.Id}&category=tents">
+    <img
+      src="/tents/${product.Image}"
+      alt="Image of ${product.Name}"
+    />
+    <h3 class="card__brand">${product.Brand.Name}</h3>
+    <h2 class="card__name">${product.Name}</h2>`;
+
+    // Handle sales
+    if (product.ListPrice != product.FinalPrice){
+      templateString += `<p class="product-card__price"><span class="productListPrice">$${product.ListPrice}</span>
+       <span class = "productFinalPrice">$${product.FinalPrice}</span></p></a></li>`
+    }else{
+      templateString += `<p class="product-card__price">$${product.FinalPrice}</p></a></li>`
+    }
+    return templateString;
   }
 
   filterList(list) {
