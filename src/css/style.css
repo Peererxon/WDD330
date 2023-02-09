@@ -62,7 +62,6 @@ header {
   height: 80px;
 
   flex-direction: column;
-  align-items: flex-end;
   box-shadow: 1px 1px 4px var(--light-grey);
   justify-content: center;
   align-items: center;
@@ -91,7 +90,7 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
-button:hover{
+button:hover {
   background-color: var(--dark-grey);
 }
 .divider {
@@ -124,7 +123,7 @@ button:hover{
   top: -20px;
 }
 
-.cart-animate{
+.cart-animate {
   animation-name: backpackChangeColor;
   animation-timing-function: ease-in;
   animation-duration: 2000ms;
@@ -132,15 +131,15 @@ button:hover{
   animation-direction: normal;
   animation-iteration-count: 1;
 }
-@keyframes backpackChangeColor{
-  from{
-    fill:black;
+@keyframes backpackChangeColor {
+  from {
+    fill: black;
   }
-  10%{
-    fill:#d59656;
+  10% {
+    fill: #d59656;
   }
-  to{
-    fill:black;
+  to {
+    fill: black;
   }
 }
 /* End cart icon styles */
@@ -267,7 +266,7 @@ footer {
   color: #008800;
 }
 
-#addToCart.button-clicked{
+#addToCart.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
@@ -276,3 +275,17 @@ footer {
   display: none;
 }
 
+.product-listing-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  gap: auto; /*Change the gap if needed*/
+}
+
+.product-listing-buttons img {
+  height: 1000px;
+  XDDD
+}
+ i will upload the changes, give me a second!!!!!! XDDD
