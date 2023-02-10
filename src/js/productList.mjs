@@ -51,3 +51,4 @@ export default class productList {
       return list.slice(randomNum, randomNum + 4);
     }
 }
+
