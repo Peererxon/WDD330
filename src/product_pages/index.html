@@ -6,40 +6,41 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sleep Outside | Cedar Ridge Rimrock 2-person tent</title>
+    <title>Sleep Outside | ...</title>
 
     <link rel="stylesheet" href="../css/style.css" />
-
-    <script src="../js/product.js" type="module"></script>
   </head>
 
   <body>
-    <header class="divider" id="main-header">
-      
-    </header>
-
+    <header class="divider" id="header"></header>
+    <ul class="breadcrumbs">
+      <li class="breadcrumbs_item">
+        <a href="../index.html" class="breadcrumbs_link">Home</a>
+      </li>
+      <li class="breadcrumbs_item">
+        <a
+          href="../product-listing/index.html"
+          class="breadcrumbs_link"
+          id="list_page_breadcrumb"
+          >Product Category</a
+        >
+      </li>
+      <li class="breadcrumbs_item">
+        <a
+          href="../product_pages/index.html"
+          class="breadcrumbs_link"
+          id="product_page_breadcrumb"
+          >Product Page</a
+        >
+      </li>
+    </ul>
     <main class="divider">
-      <section class="product-detail">
-        <h3 id="brand-name"></h3>
-
-        <h2 id="product-name" class="divider"></h2>
-
-        <img id="product-img" class="divider" src="" alt="" />
-
-        <p id="product-card-price" class="product-card__price"></p>
-
-        <p id="product-color" class="product__color"></p>
-
-        <p id="product-description" class="product__description"></p>
-
-        <div class="product-detail__add">
-          <button id="addToCart" data-id="">Add to Cart</button>
-        </div>
-      </section>
+      <div id="product_details"></div>
     </main>
 
-    <footer id="main-footer"></footer>
-    <script src="../js/loadSiteTemplate.js" type="module"></script>
-    <script src="../js/productDetails.js" type="module"></script>
+    <footer id="footer"></footer>
+    <script src="../js/main.js" type="module"></script>
+    <script src="../js/product.js" type="module"></script>
+    <script src="../js/alert.mjs" type="module"></script>
   </body>
 </html>
