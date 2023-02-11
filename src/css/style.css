@@ -196,7 +196,7 @@ button {
 .product-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: left;
   list-style-type: none;
   padding: 0;
 }
@@ -216,6 +216,11 @@ button {
 .product-card h3,
 .product-card p {
   margin: 0.5em 0;
+}
+.product-card a{
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .card__brand {
