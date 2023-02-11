@@ -32,12 +32,10 @@ export default class ProductDetails {
       }
       // adding functionality for quantity
       let item = this.handleQuantity(product, cart);
-      // console.log("2.", typeof product, product);
       // pushing item to cart
       if(item["newItem"]){
         cart.push(product);
       } else {
-        // let soCart = JSON.parse(localStorage.getItem("so-cart"));
         let Id = product.Id;
         let originalItemAdded = cart.findIndex(item => item.Id === Id);
         cart[originalItemAdded].Quantity = item["newQunatity"];
