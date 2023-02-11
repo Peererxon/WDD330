@@ -1,17 +1,21 @@
 // wrapper for querySelector...returns matching element
+
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
 
 // retrieve data from localstorage
+
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 // save data to local storage
+
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 // set a listener for both touchend and click
+
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
@@ -65,12 +69,16 @@ export async function loadHeaderFooter() {
 
 // function to Add a superscript number of items
 // in the cart to the backpack icon.
+
 export function showCartQuantity() {
   let new_cart = getLocalStorage("so-cart");
+
   // select the div element I (prince) added to the all the html docs.
+
   let cartQuantityElement = document.querySelector("#cart-items-number");
-  // Set the superscript to the number of items in the cart 'IF'
-  // there is an item in the cart.
+
+  // Set the superscript to the number of items in the cart 'IF'there is an item in the cart.
+
   if (new_cart) {
     let quantity = 0;
     for (let i in new_cart){
@@ -83,26 +91,40 @@ export function showCartQuantity() {
   }
 }
 
-//handling an unhappy path
+//Alert classes and functions.
+
 export function alertMessage(message, scroll=true) {
-  //create a div to hold the alert
+  
+  //creates a div to hold the alert
+
   const alert = document.createElement('div');
+  
   //add a class to the alert div
+
   alert.classList.add('alert');
+
   //insert the alert's message and an X to close the alert
+
   alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
   //add an eventlistener to the X to remove the alert
+
   alert.addEventListener('click', function (e) {
     if(e.target.tagName == "SPAN") {
       main.removeChild(this);
     }
+
   });
   //get the main element and store it to a variable
+
   const main = document.querySelector('main');
+
   //prepend the alert to the main container so it shows at the top
+  
   main.prepend(alert);
-  //set the scroll so that the window will automatically scroll up 
-  //to the top for the user to see the alert
+
+  //set the scroll so that the window will automatically scroll up to the top for the user to see the alert
+
   if (scroll)
   window.scrollTo(0, 0);
 }

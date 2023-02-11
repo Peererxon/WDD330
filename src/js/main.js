@@ -14,6 +14,7 @@ loadHeaderFooter().then(() => {
   });
 
   // check if page redirected correctly.
+
   if (window.location.href.includes("/product-listing/products-search.html")) {
     renderProductSearchResult();
   }
@@ -26,9 +27,11 @@ async function renderProductSearchResult() {
   const titleHtml = document.querySelector(".title");
 
   // Get all products matching search string from database.
+
   let allProducts = await dataSource.findProductBySearchString(searchString);
 
   // render the search results.
+  
   renderListWithTemplate(productCardTemplate, listUl, allProducts);
   titleHtml.innerHTML = `Showing ${allProducts.length} results for "${searchString}"`;
 }

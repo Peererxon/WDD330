@@ -393,7 +393,7 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
 }
 
 .breadcrumbs_link:active {
-  color: rgb(4, 91, 132);
+  color: rgb(8, 106, 145);
   font-weight: 500;
 }
 
@@ -436,7 +436,8 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
   display: flex;
   justify-content: space-between;
   color: white;
-  background-color: blue;
+  background-color: rgb(11, 226, 47);
+  padding: 0.3em;
 }
 .alert p {
   margin: 0;

@@ -47,12 +47,14 @@ export default class ExternalServices {
   }
 
   // Fetch all data in the database that matches the searchstring from all categories.. 
+
   async findProductBySearchString(searchString) {
   let allProducts = [];
   for (const category of categories) {
       const products = await this.getData(category);
 
-      // filter products that have the users search strings in the product name.
+      // filters products that have the users search strings in the product name.
+
       let match = products.filter(element => element.Name.toLowerCase().includes(`${searchString}`));
       for (const item of match) {
           allProducts.push(item)

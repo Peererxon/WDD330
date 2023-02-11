@@ -10,7 +10,7 @@ class Alert {
     return json;
   }
 
-  // constructor and fetchAlerts method
+  //Fetch alerts
   async create(alertFile) {
     const alerts = await this.fetchAlerts(alertFile);
     alerts.alerts.forEach((alert) => {
@@ -28,6 +28,6 @@ class Alert {
   }
 }
 
-// export default Alert;
+//Exports the default alert
 const newAlerts = new Alert();
 newAlerts.create("/json/alert.json");

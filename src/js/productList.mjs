@@ -26,13 +26,15 @@ export default class productList {
 
     async init() {
         const productList = await this.dataSource.getData(this.category);
-        //let filterdArray = this.filterProductList(productList);
+        
+
         this.renderList(productList);
-        //set title to current category
+      
 
         document.querySelector(".title").innerHTML = this.category[0].toUpperCase() + this.category.substring(1)
         
         //Code for breadcrumbs (product quantity in the list)
+
         const product_quantity = productList.length;
         const quantity_element = document.getElementById("quantity");
         quantity_element.innerHTML = `Product Category > ${product_quantity} items`;

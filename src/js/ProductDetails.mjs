@@ -43,7 +43,7 @@ export default class ProductDetails {
         cart[originalItemAdded].Quantity = item["newQunatity"];
       }
       setLocalStorage("so-cart", cart);
-      alertMessage("An item was successfully added to your cart.")
+      alertMessage("The item was added to your cart successfully.")
     }
 
     handleQuantity(product, cart){
@@ -102,16 +102,20 @@ export default class ProductDetails {
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
       </div>
       </section>`
-      //insert HTML
+
+      
+
       document.getElementById("product_details").innerHTML = product_string;
     }
 
     //Code to calculate discounts for products
+
     calc_discount() {
       return 100 - this.product.ListPrice / this.product.SuggestedRetailPrice*100;
     }
 
     //Code for animation for cart icon
+    
     play() {
       const cart = document.querySelector('.cart');
       cart.classList.add('cart-animate');
