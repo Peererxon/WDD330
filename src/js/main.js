@@ -6,6 +6,8 @@ import {
 } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import { productCardTemplate } from "./productList.mjs";
+import Alert from './alert.mjs';
+
 
 loadHeaderFooter().then(() => {
   document.forms[0].addEventListener("submit", () => {
@@ -35,3 +37,7 @@ async function renderProductSearchResult() {
   renderListWithTemplate(productCardTemplate, listUl, allProducts);
   titleHtml.innerHTML = `Showing ${allProducts.length} results for "${searchString}"`;
 }
+
+// Load the alerts
+let alertList = new Alert();
+alertList.create('../json/alert.json');

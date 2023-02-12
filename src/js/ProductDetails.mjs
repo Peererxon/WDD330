@@ -66,6 +66,8 @@ export default class ProductDetails {
     }
 
     async addToCartHandler(e) {
+      // Color the button
+      document.querySelector("#addToCart").classList.add("button-clicked");
       //animate icon
       this.play();
       //get product
