@@ -93,18 +93,22 @@ export default class ProductDetails {
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
       <img class="divider product_img"
         src="${this.product.Images.PrimaryMedium}"
-        alt="${this.product.Name}"/>
-      <p class="discount">Sale: ${discount}% Off</p>
-      <p class="product-card__price">Was: <strike>$${this.product.SuggestedRetailPrice}</strike> Now: $${this.product.ListPrice}</p>
-      <p class="product__color">${this.product.Colors[0].ColorName}</p>
+        alt="${this.product.Name}"/>`;
+        // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
+      if (this.product.SuggestedRetailPrice != this.product.finalPrice){
+        product_string += `<p class="discount">Sale: ${discount}% Off</p>
+        <p class="product-card__price">Was: <span class="productListPrice">$${this.product.SuggestedRetailPrice}</span>
+         Now: <span class="productFinalPrice">$${this.product.FinalPrice}</span></p>`;
+      }else{
+        product_string += `<p class="product-card__price">$${this.product.FinalPrice}</p>`;
+      }
+      product_string += ` <p class="product__color">${this.product.Colors[0].ColorName}</p>
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
       </div>
       </section>`
-
       
-
       document.getElementById("product_details").innerHTML = product_string;
     }
 
