@@ -512,6 +512,9 @@ button:hover{
   color: #008800;
 }
 
+#addToCart:hover{
+  background-color: grey;
+}
 #addToCart.button-clicked{
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
