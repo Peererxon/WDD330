@@ -1,6 +1,6 @@
 :root {
   --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-headline: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -131,7 +131,7 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.cart-animate{
+.cart-animate {
   animation-name: backpackChangeColor;
   animation-timing-function: ease-in;
   animation-duration: 2000ms;
@@ -139,15 +139,15 @@ button {
   animation-direction: normal;
   animation-iteration-count: 1;
 }
-@keyframes backpackChangeColor{
-  from{
-    fill:black;
+@keyframes backpackChangeColor {
+  from {
+    fill: black;
   }
-  10%{
-    fill:#d59656;
+  10% {
+    fill: #d59656;
   }
-  to{
-    fill:black;
+  to {
+    fill: black;
   }
 }
 #cart-items-number {
@@ -235,7 +235,7 @@ button {
 .product-card p {
   margin: 0.5em 0;
 }
-.product-card a{
+.product-card a {
   width: 100%;
   height: 100%;
   display: block;
@@ -401,7 +401,7 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
 }
 
 .breadcrumbs_item:not(:last-of-type)::after {
-  content: ">";
+  content: '>';
   margin: 0 0.5em;
   color: gray;
 }
@@ -461,7 +461,7 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
   color: black;
   background-color: rgb(170, 170, 130);
   padding: 5px;
-  border: 1px solid rgba(128,128,128,1);
+  border: 1px solid rgba(128, 128, 128, 1);
   border-radius: 0.5em;
   align-items: center;
   margin: 3px;
@@ -477,20 +477,20 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
   padding: 0 0.5em;
   color: white;
 }
-.alert span:hover{
+.alert span:hover {
   background-color: rgb(120, 120, 120);
-  cursor:pointer;
+  cursor: pointer;
 }
-.fading{
+.fading {
   animation-name: fade;
   animation-duration: 1.01s;
   animation-iteration-count: 1;
 }
-@keyframes fade{
-  from{
+@keyframes fade {
+  from {
     opacity: 1;
   }
-  to{
+  to {
     opacity: 0;
   }
 }
@@ -500,7 +500,7 @@ footer {
   padding: 1em;
 }
 
-button:hover{
+button:hover {
   background-color: var(--dark-grey);
 }
 .productListPrice {
@@ -512,14 +512,25 @@ button:hover{
   color: #008800;
 }
 
-#addToCart:hover{
+#addToCart:hover {
   background-color: grey;
 }
-#addToCart.button-clicked{
+#addToCart.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
 
 .hide {
   display: none;
+}
+
+.newsletter-submit-form {
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 10px;
+}
+
+.newsletter-submit-button {
+  margin: 0;
+  font-size: 1rem;
 }
