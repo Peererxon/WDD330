@@ -41,3 +41,13 @@ async function renderProductSearchResult() {
 // Load the alerts
 let alertList = new Alert();
 alertList.create('../json/alert.json');
+loadCallToAction();
+
+function loadCallToAction(){
+  // Alternatively could use the so-cart to put the alert up if they have never put anything in their cart
+  let visited = getLocalStorage("visited");
+  if (visited == null || visited == false){
+    setLocalStorage("visited", true);
+    Alert.createOneAlert("Register with us today! If you do you'll be entered into a giveway to win a free Marmot Ajax tent!")
+  }
+}
