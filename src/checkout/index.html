@@ -21,31 +21,33 @@
           <legend>Customer Name</legend>
           <div class="formbox">
             <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname" required />
+            <input  class="validation" type="text" name="fname" id="fname" required />
           </div>
           <div class="formbox">
-            <label for="fname">Last Name</label>
-            <input type="text" name="lname" id="lname" required />
+            <label for="lname">Last Name</label>
+            <input class="validation" type="text" name="lname" id="lname" required />
           </div>
         </fieldset>
         <fieldset class="fieldset" id="fieldset2">
           <legend>Customer Address</legend>
           <div class="formbox">
             <label for="street">Street Address</label>
-            <input type="text" name="street" id="street-address" required />
+            <input  class="validation" type="text" name="street" id="street-address" minlength="5" required />
           </div>
           <div class="formbox">
             <label for="city">City</label>
-            <input type="text" name="city" id="city" required />
+            <input  class="validation" type="text" name="city" id="city" required />
           </div>
           <div class="formbox">
-            <label for="state">State</label>
-            <input type="text" name="state" id="state" required />
+            <label for="state">State/Territory</label>
+            <input class="validation" type="text" name="state" id="state" required />
           </div>
           <div class="formbox">
             <label for="zip">Zip Code</label>
             <input
+              class="validation"
               type="text"
+              placeholder="12345"
               pattern="([0-9][0-9][0-9][0-9][0-9])"
               name="zip"
               id="zipcode"
@@ -58,6 +60,7 @@
           <div class="formbox">
             <label for="credit-card">Credit Card</label>
             <input
+              class="validation"
               type="tel"
               pattern="[0-9\s]{13,19}"
               maxlength="19"
@@ -70,6 +73,7 @@
           <div class="formbox">
             <label for="exp">Expiration Date</label>
             <input
+              class="validation"
               type="text"
               pattern="(0[1-9]|1[0-2])[/](20)?[0-9]{2}"
               placeholder="mm/yy"
@@ -81,6 +85,7 @@
           <div class="formbox">
             <label for="security-code">Security Code</label>
             <input
+              class="validation"
               type="text"
               pattern="([0-9][0-9][0-9])"
               value="123"

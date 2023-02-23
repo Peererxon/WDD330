@@ -85,6 +85,7 @@ export async function convertFormToJSON (form) {
       //process error handling => catch errors sent back from server
 
     try {
+        debugger;
         const res = await service.checkout(jsonObject);
         //console.log(res);
         setLocalStorage("so-cart", []);
@@ -99,7 +100,12 @@ export async function convertFormToJSON (form) {
         const alerts = document.querySelectorAll(".alert");
         alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
         //display errors
-        alertMessage(err.message); 
+        for (let key in err.message){
+            alertMessage(err.message[key]);
+            // They should only have 1 key? the keys() wasn't working.
+            break;
+        }
+        //alertMessage(keys(err.message)[0]); 
     }
 };
 

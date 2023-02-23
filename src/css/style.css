@@ -534,3 +534,9 @@ button:hover {
   margin: 0;
   font-size: 1rem;
 }
+form .validation:valid{
+  border-left: 6px solid green;
+}
+form .validation:invalid{
+  border-left:  6px solid red;
+}
