@@ -450,9 +450,13 @@ input.qty-in-cart::-webkit-inner-spin-button:default {
 .formbox {
   margin: 1em;
 }
-
+.checkout-button{
+  display: flex;
+  justify-content: center;
+}
 .checkout-button a {
   text-decoration: none;
+  display: block;
 }
 
 .alert {
@@ -501,7 +505,7 @@ footer {
 }
 
 button:hover {
-  background-color: var(--dark-grey);
+  background-color: grey;
 }
 .productListPrice {
   color: #aa0000;
@@ -512,9 +516,6 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover {
-  background-color: grey;
-}
 #addToCart.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
