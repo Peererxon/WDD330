@@ -17,33 +17,64 @@ class CommentsService {
 
     const comments = this.getComments();
 
-    const productId = getParams("product");
-
-    if (comments) {
-      const productComments = comments.find(
-        (comment) => comment.productId === productId
-      );
-
-      const newComment = {
-        ...productComments,
-        comments: [...productComments.comments, textAreaValue],
-      };
-
-      const index = comments.findIndex((entry) => entry.id === productId);
-
-      const updatedComments = (comments[index] = newComment);
-
-      setLocalStorage(this.localStoragaKey, [updatedComments]);
+    // create localstorage for comments
+    if (!comments) {
+      setLocalStorage(this.localStoragaKey, [
+        {
+          productId: this.productId,
+          comments: [textAreaValue],
+        },
+      ]);
 
       return;
     }
 
-    setLocalStorage(this.localStoragaKey, [
-      {
-        productId: productId,
-        comments: [textAreaValue],
-      },
-    ]);
+    // const productComments = comments.find(
+    //   (comment) => comment.productId === this.productId
+    // );
+
+    // const newComment = {
+    //   ...productComments,
+    //   comments: [...productComments.comments, textAreaValue],
+    // };
+
+    const index = comments.findIndex(
+      (entry) => entry.productId === this.productId
+    );
+
+    let commentsCopy = [...comments];
+
+    commentsCopy[index].comments = [
+      ...commentsCopy[index].comments,
+      textAreaValue,
+    ];
+
+    setLocalStorage(this.localStoragaKey, commentsCopy);
+
+    // if (productComments) {
+    //   const newComment = {
+    //     ...productComments,
+    //     comments: [...productComments.comments, textAreaValue],
+    //   };
+
+    //   const index = comments.findIndex((entry) => entry.id === productId);
+
+    //   const updatedComments = [...comments];
+
+    //   updatedComments[index] = newComment;
+
+    //   setLocalStorage(this.localStoragaKey, [updatedComments]);
+
+    //   return;
+    // }
+
+    // setLocalStorage(this.localStoragaKey, [
+    //   ...comments,
+    //   {
+    //     productId: this.productId,
+    //     comments: [textAreaValue],
+    //   },
+    // ]);
   }
 
   printComments() {
@@ -51,19 +82,23 @@ class CommentsService {
 
     const comments = this.getComments();
 
-    const productComments = comments.find(
-      (comment) => comment.productId === this.productId
-    );
+    if (comments) {
+      const productComments = comments.find(
+        (comment) => comment.productId === this.productId
+      );
 
-    productComments.comments.forEach((comment) => {
-      const template = `
-      <div class="comment">
-        <img src="https://ui-avatars.com/api/?name=John+Doe" alt="user profile image" />
+      if (productComments) {
+        productComments.comments.forEach((comment) => {
+          const template = `
+          <div class="comment">
+          <img src="https://ui-avatars.com/api/?name=John+Doe" alt="user profile image" />
           <textarea disabled>${comment}</textarea>
-      </div>`;
+          </div>`;
 
-      commentsContainer.insertAdjacentHTML("afterend", template);
-    });
+          commentsContainer.insertAdjacentHTML("afterend", template);
+        });
+      }
+    }
   }
 
   printNewComment() {
@@ -74,7 +109,14 @@ class CommentsService {
     const productComments = comments.find(
       (comment) => comment.productId === this.productId
     );
+    console.log(
+      "🚀 ~ file: commentsService.js:87 ~ CommentsService ~ printNewComment ~ productComments:",
+      productComments
+    );
 
+    // if(productComments){
+
+    // }
     const newComment = productComments.comments.slice(-1);
 
     const template = `
@@ -87,9 +129,7 @@ class CommentsService {
   }
 }
 
-const productId = getParams("product");
-
-const commentService = new CommentsService("comments", productId);
+const commentService = new CommentsService("comments", getParams("product"));
 
 commentService.printComments();
 
@@ -98,5 +138,5 @@ form.addEventListener("submit", (e) => {
 
   commentService.saveComment();
 
-  commentService.printNewComment();
+  // commentService.printNewComment();
 });
