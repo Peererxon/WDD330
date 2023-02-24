@@ -3,23 +3,23 @@ import { getParams, setLocalStorage, getLocalStorage } from "./utils.mjs";
 const form = document.querySelector("#comment-form");
 
 class CommentsService {
-  constructor(localStoragaKey, productId) {
-    this.localStoragaKey = localStoragaKey;
+  constructor(localStorageKey, productId) {
+    this.localStorageKey = localStorageKey;
     this.productId = productId;
   }
 
   getComments() {
-    return getLocalStorage(this.localStoragaKey);
+    return getLocalStorage(this.localStorageKey);
   }
 
   saveComment() {
-    const textAreaValue = document.querySelector("#comment-textarea").value;
+    let textAreaValue = document.querySelector("#comment-textarea").value;
 
     const comments = this.getComments();
 
-    // create localstorage for comments
+    // create local storage for comments in the first use
     if (!comments) {
-      setLocalStorage(this.localStoragaKey, [
+      setLocalStorage(this.localStorageKey, [
         {
           productId: this.productId,
           comments: [textAreaValue],
@@ -29,52 +29,30 @@ class CommentsService {
       return;
     }
 
-    // const productComments = comments.find(
-    //   (comment) => comment.productId === this.productId
-    // );
-
-    // const newComment = {
-    //   ...productComments,
-    //   comments: [...productComments.comments, textAreaValue],
-    // };
+    let commentsCopy = [...comments];
 
     const index = comments.findIndex(
       (entry) => entry.productId === this.productId
     );
 
-    let commentsCopy = [...comments];
+    if (index === -1) {
+      commentsCopy.push({
+        productId: this.productId,
+        comments: [textAreaValue],
+      });
+
+      setLocalStorage(this.localStorageKey, commentsCopy);
+      return;
+    }
 
     commentsCopy[index].comments = [
       ...commentsCopy[index].comments,
       textAreaValue,
     ];
 
-    setLocalStorage(this.localStoragaKey, commentsCopy);
+    document.querySelector("#comment-textarea").value = "";
 
-    // if (productComments) {
-    //   const newComment = {
-    //     ...productComments,
-    //     comments: [...productComments.comments, textAreaValue],
-    //   };
-
-    //   const index = comments.findIndex((entry) => entry.id === productId);
-
-    //   const updatedComments = [...comments];
-
-    //   updatedComments[index] = newComment;
-
-    //   setLocalStorage(this.localStoragaKey, [updatedComments]);
-
-    //   return;
-    // }
-
-    // setLocalStorage(this.localStoragaKey, [
-    //   ...comments,
-    //   {
-    //     productId: this.productId,
-    //     comments: [textAreaValue],
-    //   },
-    // ]);
+    setLocalStorage(this.localStorageKey, commentsCopy);
   }
 
   printComments() {
@@ -109,14 +87,7 @@ class CommentsService {
     const productComments = comments.find(
       (comment) => comment.productId === this.productId
     );
-    console.log(
-      "🚀 ~ file: commentsService.js:87 ~ CommentsService ~ printNewComment ~ productComments:",
-      productComments
-    );
 
-    // if(productComments){
-
-    // }
     const newComment = productComments.comments.slice(-1);
 
     const template = `
@@ -138,5 +109,5 @@ form.addEventListener("submit", (e) => {
 
   commentService.saveComment();
 
-  // commentService.printNewComment();
+  commentService.printNewComment();
 });
