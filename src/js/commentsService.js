@@ -62,19 +62,41 @@ class CommentsService {
           <textarea disabled>${comment}</textarea>
       </div>`;
 
-      commentsContainer.insertAdjacentHTML("beforeend", template);
+      commentsContainer.insertAdjacentHTML("afterend", template);
     });
   }
+
+  printNewComment() {
+    const commentsContainer = document.querySelector(".comments");
+
+    const comments = this.getComments();
+
+    const productComments = comments.find(
+      (comment) => comment.productId === this.productId
+    );
+
+    const newComment = productComments.comments.slice(-1);
+
+    const template = `
+    <div class="comment">
+      <img src="https://ui-avatars.com/api/?name=John+Doe" alt="user profile image" />
+        <textarea disabled>${newComment[0]}</textarea>
+    </div>`;
+
+    commentsContainer.insertAdjacentHTML("afterend", template);
+  }
 }
+
+const productId = getParams("product");
+
+const commentService = new CommentsService("comments", productId);
+
+commentService.printComments();
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const productId = getParams("product");
+  commentService.saveComment();
 
-  const commentService = new CommentsService("comments", productId);
-
-  // commentService.saveComment();
-
-  commentService.printComments("asdasdasd");
+  commentService.printNewComment();
 });
