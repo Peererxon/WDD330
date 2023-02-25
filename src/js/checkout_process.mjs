@@ -103,6 +103,8 @@ export async function convertFormToJSON (form) {
         for (let key in err.message){
             alertMessage(err.message[key]);
             // They should only have 1 key? the keys() wasn't working.
+            // The err.message has an attribute with a different name depending on the error,
+            // and that attribute contains the message.
             break;
         }
         //alertMessage(keys(err.message)[0]); 
