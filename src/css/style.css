@@ -534,3 +534,9 @@ button:hover {
   margin: 0;
   font-size: 1rem;
 }
+.sort form div{
+  display: block;
+}
+.sort form select{
+  font-size: 1rem;
+}
