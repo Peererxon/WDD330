@@ -25,8 +25,8 @@ export default class productList {
     }
 
     async init() {
-        const productList = await this.dataSource.getData(this.category);
-        
+        let productList = await this.dataSource.getData(this.category);
+        productList = this.sortProductList(productList);
 
         this.renderList(productList);
       
@@ -51,6 +51,40 @@ export default class productList {
       // from the list of all tents/products.
       var randomNum = Math.floor(Math.random() * ((list.length + 1) - 4));
       return list.slice(randomNum, randomNum + 4);
+    }
+
+    sortProductList(list){
+      let sortBy = document.querySelector("#sort-by").value
+        let ascending = document.querySelector("#order").checked;
+        if (sortBy == "Name"){
+          list.sort((a, b)=>{
+            let returnValue = 0;
+            if (a.NameWithoutBrand > b.NameWithoutBrand){
+              returnValue = 1;
+            }else{
+              returnValue = -1;
+            }
+            if (ascending){
+              returnValue *= -1;
+            }
+            return returnValue;
+          })
+        }
+        if (sortBy == "Price"){
+          list.sort((a, b)=>{
+            let returnValue = 0;
+            if (a.FinalPrice < b.FinalPrice){
+              returnValue = 1;
+            }else{
+              returnValue = -1;
+            }
+            if (ascending){
+              returnValue *= -1;
+            }
+            return returnValue;
+          })
+        }
+        return list;
     }
 }
 
