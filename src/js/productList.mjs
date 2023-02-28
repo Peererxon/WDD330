@@ -26,7 +26,6 @@ export default class productList {
 
     async init() {
         let productList = await this.dataSource.getData(this.category);
-        debugger;
         productList = this.sortProductList(productList);
 
         this.renderList(productList);
