@@ -95,6 +95,11 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
+    console.log(this.product);
+
+    if ('ExtraImages' in this.product.Images) {
+      console.log('yes');
+    }
     //get discount to insert into product string literal
     let discount = Math.trunc(this.calc_discount());
     //create product string literal
