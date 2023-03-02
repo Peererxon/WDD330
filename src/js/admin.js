@@ -1,14 +1,19 @@
 import auth from './admin.mjs';
-function fixButton() {
-  let button = document.querySelector('#submit');
-  button.addEventListener('submit', (e) => {
+
+function handleSubmit() {
+  let form = document.querySelector('#admin-form');
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     auth.login();
   });
 }
+
 function addForm() {
   let main = document.querySelector('main');
-  main.innerHTML = auth.showLogin();
+  main.innerHTML = auth.buildLogin();
 }
+
 addForm();
-fixButton();
+
+handleSubmit();

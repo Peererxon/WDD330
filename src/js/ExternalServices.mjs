@@ -62,4 +62,25 @@ export default class ExternalServices {
     }
     return allProducts;
   }
+
+  async loginRequest(credentials) {
+    try {
+      const response = await fetch(`${baseURL}login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+      });
+
+      const responseConvertedToJson = await convertToJson(response);
+
+      return responseConvertedToJson;
+    } catch (error) {
+      console.log(
+        '🚀 ~ file: ExternalServices.mjs:70 ~ ExternalServices ~ login ~ error:',
+        error
+      );
+    }
+  }
 }
