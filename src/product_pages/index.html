@@ -36,10 +36,26 @@
     </ul>
     <main class="divider">
       <div id="product_details"></div>
+      <section>
+        <h2>Comments</h2>
+        <div>
+          <form action="#" method="post" class="comment-form" id="comment-form">
+            <textarea
+              name="comment-textarea"
+              id="comment-textarea"
+              cols="10"
+              rows="5"
+            ></textarea>
+            <button type="submit">Comment</button>
+          </form>
+        </div>
+        <div class="comments" id="comments"></div>
+      </section>
     </main>
 
     <footer id="footer"></footer>
     <script src="../js/main.js" type="module"></script>
     <script src="../js/product.js" type="module"></script>
+    <script src="../js/commentsService.js" type="module"></script>
   </body>
 </html>

@@ -534,9 +534,27 @@ button:hover {
   margin: 0;
   font-size: 1rem;
 }
-.sort form div{
+.sort form div {
   display: block;
 }
-.sort form select{
+.sort form select {
   font-size: 1rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+}
+
+.comments {
+  margin: 1rem 0;
+}
+
+.comment {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comment textarea {
+  width: 100%;
 }
