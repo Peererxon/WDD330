@@ -5,7 +5,12 @@ function handleSubmit() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    auth.login();
+
+    const email = document.querySelector('#email').value;
+
+    const password = document.querySelector('#password').value;
+
+    auth.login(email, password);
   });
 }
 
