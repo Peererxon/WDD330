@@ -2,8 +2,22 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 export function productCardTemplate(product) {
     //Use destructoring to enable readable code and pull specific properties from our object
-    const {Id, Images, Name, ListPrice, NameWithoutBrand} = product;
-    return `<li class="product-card">
+    const {Id, Images, Name, SuggestedRetailPrice, FinalPrice, NameWithoutBrand} = product;
+    debugger;
+    if (FinalPrice < SuggestedRetailPrice){
+      return `<li class="product-card">
+      <a href="/product_pages/index.html?product=${Id}">
+        <img
+          src="${Images.PrimarySmall}"
+          alt="Image of ${NameWithoutBrand}"
+        />
+        <h3 class="card__brand">${Name}</h3>
+        <h2 class="card__name">${NameWithoutBrand}</h2>
+        <p class="product-card__price"><span class="productListPrice">$${SuggestedRetailPrice}</span>
+        <span class="productFinalPrice">$${FinalPrice}</span></p></a>
+    </li>`
+    }else{
+      return `<li class="product-card">
     <a href="/product_pages/index.html?product=${Id}">
       <img
         src="${Images.PrimarySmall}"
@@ -11,8 +25,10 @@ export function productCardTemplate(product) {
       />
       <h3 class="card__brand">${Name}</h3>
       <h2 class="card__name">${NameWithoutBrand}</h2>
-      <p class="product-card__price">$${ListPrice}</p></a>
+      <p class="product-card__price">$${SuggestedRetailPrice}</p></a>
   </li>`
+    }
+    
 }
 
 export default class productList {

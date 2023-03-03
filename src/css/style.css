@@ -558,3 +558,6 @@ button:hover {
 .comment textarea {
   width: 100%;
 }
+.discount{
+  font-weight: bold;
+}

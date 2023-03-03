@@ -96,7 +96,7 @@ export default class ProductDetails {
         alt="${this.product.Name}"/>`;
         // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
       if (this.product.SuggestedRetailPrice != this.product.finalPrice){
-        product_string += `<p class="discount">Sale: ${discount}% Off</p>
+        product_string += `<p class="discount">Sale: ${discount}% Off. You save $${Math.round(this.product.SuggestedRetailPrice - this.product.FinalPrice)} dollars!</p>
         <p class="product-card__price">Was: <span class="productListPrice">$${this.product.SuggestedRetailPrice}</span>
          Now: <span class="productFinalPrice">$${this.product.FinalPrice}</span></p>`;
       }else{
