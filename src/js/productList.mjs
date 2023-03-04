@@ -1,4 +1,5 @@
 import { renderListWithTemplate } from './utils.mjs';
+import ProductDetailsModal from './ProductDetailsModal.mjs';
 
 export function productCardTemplate(product) {
   //Use destructoring to enable readable code and pull specific properties from our object
@@ -51,7 +52,24 @@ export default class productList {
     const buttonsArrayLenght = buttons.length;
 
     for (let index = 0; index < buttonsArrayLenght; index++) {
-      buttons[index].addEventListener('click', () => alert('click'));
+      buttons[index].addEventListener('click', async () => {
+        const response = await fetch(
+          'http://server-nodejs.cit.byui.edu:3000/product/15UGY'
+        );
+
+        const product = await response.json();
+
+        console.log(
+          '🚀 ~ file: productList.mjs:58 ~ productList ~ buttons[index].addEventListener ~ product:',
+          product
+        );
+
+        const p = new ProductDetailsModal(product.Result);
+
+        document.querySelector('#quickLookupModal').classList.remove('hide');
+
+        p.renderProductDetails();
+      });
     }
   }
 
