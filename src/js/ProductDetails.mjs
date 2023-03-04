@@ -2,7 +2,8 @@ import {
   setLocalStorage,
   getLocalStorage,
   showCartQuantity,
-  alertMessage
+  alertMessage,
+  initCarousel
 } from './utils.mjs';
 
 export default class ProductDetails {
@@ -97,18 +98,61 @@ export default class ProductDetails {
   renderProductDetails() {
     console.log(this.product);
 
+    let product_string;
+
     if ('ExtraImages' in this.product.Images) {
-      console.log('yes');
-    }
-    //get discount to insert into product string literal
-    let discount = Math.trunc(this.calc_discount());
-    //create product string literal
-    let product_string = `<section class="product-detail">
+      console.log('product');
+      product_string = `<section class="product-detail">
+      <h3>${this.product.Brand.Name}</h3>
+      <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+      <!-- slider container -->
+    <div class="slider">
+      <!-- slide 1 -->
+      <div class="slide">
+        <img
+          src="https://source.unsplash.com/random?landscape,mountain"
+          alt=""
+        />
+      </div>
+
+      <!-- slide 2 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,cars" alt="" />
+      </div>
+
+      <!-- slide 3 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,night" alt="" />
+      </div>
+
+      <!-- slide 4 -->
+      <div class="slide">
+        <img src="https://source.unsplash.com/random?landscape,city" alt="" />
+      </div>
+
+      <!-- Control buttons -->
+      <button class="btn btn-next">prev</button>
+      <button class="btn btn-prev">next</button>
+    </div>`;
+    } else {
+      product_string = `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
       <img class="divider product_img"
         src="${this.product.Images.PrimaryMedium}"
         alt="${this.product.Name}"/>`;
+    }
+    // product_string = `<section class="product-detail">
+    //   <h3>${this.product.Brand.Name}</h3>
+    //   <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+    //   <img class="divider product_img"
+    //     src="${this.product.Images.PrimaryMedium}"
+    //     alt="${this.product.Name}"/>`;
+
+    //get discount to insert into product string literal
+    let discount = Math.trunc(this.calc_discount());
+    //create product string literal
+
     // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
     if (this.product.SuggestedRetailPrice != this.product.finalPrice) {
       product_string += `<p class="discount">Sale: ${discount}% Off</p>
@@ -125,6 +169,8 @@ export default class ProductDetails {
       </section>`;
 
     document.getElementById('product_details').innerHTML = product_string;
+
+    initCarousel();
   }
 
   //Code to calculate discounts for products
