@@ -97,20 +97,27 @@ export default class ProductDetails {
 
   renderProductDetails() {
     let product_string;
-    console.log(this.product);
-    if ('ExtraImages' in this.product.Images) {
+
+    const extraImageLenght = this.product.Images.ExtraImages.length;
+
+    if ('ExtraImages' in this.product.Images && extraImageLenght > 0) {
       product_string = `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
       <!-- slider container -->
-      <div class="slider">`;
+      <div class="slider">
+        <div class="slide">
+           <img
+            src="${this.product.Images.PrimaryMedium}"
+            alt="${this.product.Name}"/>
+        </div>`;
 
       // This loop adds the HTML to render the extra images into the image carousel
-      for (let index = 0; index < 3; index++) {
+      for (let index = 0; index < extraImageLenght; index++) {
         product_string += `<div class="slide">
                               <img
-                                src="https://source.unsplash.com/random?landscape,mountain"
-                                alt=""
+                                src="${this.product.Images.ExtraImages[index].Src}"
+                                alt="${this.product.Images.ExtraImages[index].Title}"
                               />
                             </div>`;
       }
@@ -126,12 +133,6 @@ export default class ProductDetails {
         src="${this.product.Images.PrimaryMedium}"
         alt="${this.product.Name}"/>`;
     }
-    // product_string = `<section class="product-detail">
-    //   <h3>${this.product.Brand.Name}</h3>
-    //   <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-    //   <img class="divider product_img"
-    //     src="${this.product.Images.PrimaryMedium}"
-    //     alt="${this.product.Name}"/>`;
 
     //get discount to insert into product string literal
     let discount = Math.trunc(this.calc_discount());
