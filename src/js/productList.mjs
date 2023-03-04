@@ -53,16 +53,13 @@ export default class productList {
 
     for (let index = 0; index < buttonsArrayLenght; index++) {
       buttons[index].addEventListener('click', async () => {
+        const productId = buttons[index].getAttribute('data-src');
+
         const response = await fetch(
-          'http://server-nodejs.cit.byui.edu:3000/product/15UGY'
+          `http://server-nodejs.cit.byui.edu:3000/product/${productId}`
         );
 
         const product = await response.json();
-
-        console.log(
-          '🚀 ~ file: productList.mjs:58 ~ productList ~ buttons[index].addEventListener ~ product:',
-          product
-        );
 
         const p = new ProductDetailsModal(product.Result);
 

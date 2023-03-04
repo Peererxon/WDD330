@@ -611,9 +611,11 @@ button:hover {
   position: fixed;
   width: 50vw;
   height: 50vh;
-  background: hotpink;
+  background: #d3d3d3ff;
+  border: 1px solid black;
   top: 20%;
   left: 25%;
+  padding: 1rem;
 }
 
 button.quick-button {
