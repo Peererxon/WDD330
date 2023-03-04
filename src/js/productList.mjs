@@ -12,6 +12,7 @@ export function productCardTemplate(product) {
       <h3 class="card__brand">${Name}</h3>
       <h2 class="card__name">${NameWithoutBrand}</h2>
       <p class="product-card__price">$${ListPrice}</p></a>
+      <button class="quick-button">Quick lookup</button>
   </li>`;
 }
 
