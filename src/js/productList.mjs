@@ -12,7 +12,7 @@ export function productCardTemplate(product) {
       <h3 class="card__brand">${Name}</h3>
       <h2 class="card__name">${NameWithoutBrand}</h2>
       <p class="product-card__price">$${ListPrice}</p></a>
-      <button class="quick-button">Quick lookup</button>
+      <button class="quick-button" data-src="${Id}">Quick lookup</button>
   </li>`;
 }
 
@@ -44,6 +44,15 @@ export default class productList {
 
   renderList(productList) {
     renderListWithTemplate(productCardTemplate, this.listElement, productList);
+
+    // Setting click event to trigger quick lookup modal
+    const buttons = document.querySelectorAll('.quick-button');
+
+    const buttonsArrayLenght = buttons.length;
+
+    for (let index = 0; index < buttonsArrayLenght; index++) {
+      buttons[index].addEventListener('click', () => alert('click'));
+    }
   }
 
   filterProductList(list) {
