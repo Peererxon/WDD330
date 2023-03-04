@@ -126,7 +126,6 @@ export function initCarousel() {
 
   // add event listener and navigation functionality
   nextSlide.addEventListener('click', function () {
-    alert('clicl');
     // check if current slide is the last and reset current slide
     if (curSlide === maxSlide) {
       curSlide = 0;

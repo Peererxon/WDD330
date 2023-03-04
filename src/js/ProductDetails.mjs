@@ -96,43 +96,27 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    console.log(this.product);
-
     let product_string;
-
+    console.log(this.product);
     if ('ExtraImages' in this.product.Images) {
-      console.log('product');
       product_string = `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
       <!-- slider container -->
-    <div class="slider">
-      <!-- slide 1 -->
-      <div class="slide">
-        <img
-          src="https://source.unsplash.com/random?landscape,mountain"
-          alt=""
-        />
-      </div>
+      <div class="slider">`;
 
-      <!-- slide 2 -->
-      <div class="slide">
-        <img src="https://source.unsplash.com/random?landscape,cars" alt="" />
-      </div>
-
-      <!-- slide 3 -->
-      <div class="slide">
-        <img src="https://source.unsplash.com/random?landscape,night" alt="" />
-      </div>
-
-      <!-- slide 4 -->
-      <div class="slide">
-        <img src="https://source.unsplash.com/random?landscape,city" alt="" />
-      </div>
-
-      <!-- Control buttons -->
-      <button class="btn btn-next">prev</button>
-      <button class="btn btn-prev">next</button>
+      // This loop adds the HTML to render the extra images into the image carousel
+      for (let index = 0; index < 3; index++) {
+        product_string += `<div class="slide">
+                              <img
+                                src="https://source.unsplash.com/random?landscape,mountain"
+                                alt=""
+                              />
+                            </div>`;
+      }
+      product_string += `<!-- Control buttons -->
+      <button class="btn btn-next">></button>
+      <button class="btn btn-prev"><</button>
     </div>`;
     } else {
       product_string = `<section class="product-detail">
