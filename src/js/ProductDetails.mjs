@@ -15,8 +15,12 @@ export default class ProductDetails {
       //render HTML with product details
       this.renderProductDetails();
     //add listener to cart button
-      document.getElementById("addToCart")
+      document.getElementById("addToCart") // Why is this so complicated? The product information is already in this.product.
       .addEventListener("click", this.addToCartHandler.bind(this));
+      document.querySelector("#addToWishlist")
+      .addEventListener('click', (e)=>{
+        this.addToWishList(this.product);
+      });
 
     //Code for breadcrumbs (href tags)
     const breadcrumb_element = document.getElementById("product_page_breadcrumb");
@@ -25,8 +29,9 @@ export default class ProductDetails {
     document.getElementById("list_page_breadcrumb").href = `../product-listing/index.html?category=${product_category}`;
     }
 
-    addProductToCart(product) {
-      let cart = getLocalStorage("so-cart");
+    addProductToCart(product, location='so-cart') {
+      debugger;
+      let cart = getLocalStorage(location);
       if (cart === null) {
         cart = [];
       }
@@ -38,22 +43,24 @@ export default class ProductDetails {
       } else {
         let Id = product.Id;
         let originalItemAdded = cart.findIndex(item => item.Id === Id);
-        cart[originalItemAdded].Quantity = item["newQunatity"];
+        cart[originalItemAdded].Quantity = item["newQuantity"];
       }
-      setLocalStorage("so-cart", cart);
-      alertMessage("The item was added to your cart successfully.")
+      setLocalStorage(location, cart);
+      if (location == 'so-cart'){
+        alertMessage("The item was added to your cart successfully.")
+      }else{
+        alertMessage(`The item was added to the ${location} successfully.`)
+      }
+      
     }
 
     handleQuantity(product, cart){
       let newItem = true;
       let newQuantity = {"Quantity": 0};
       for(let i in cart) {
-        // console.log("3.", cart[i]);
         if(cart[i].Id === product.Id){
-          // console.log("5. ", cart[i].Quantity, typeof product.Quantity, product.Quantity);
           cart[i].Quantity = parseInt(cart[i].Quantity) + 1;
           newQuantity = cart[i].Quantity;
-          // console.log("4. ", cart[i].Id, product.Id, typeof cart[i].Quantity, cart[i].Quantity, typeof product.Quantity, product.Quantity);
           newItem = false;
           break;
         }
@@ -61,13 +68,13 @@ export default class ProductDetails {
       if(newItem) {
         product.Quantity = 1;
       }
-      // console.log("1.", typeof product.Quantity, product.Quantity);
-      return {"newItem" : newItem, "newQunatity" : newQuantity};
+      return {"newItem" : newItem, "newQuantity" : newQuantity};
     }
 
     async addToCartHandler(e) {
       // Color the button
       document.querySelector("#addToCart").classList.add("button-clicked");
+  
       //animate icon
       this.play();
       //get product
@@ -77,10 +84,17 @@ export default class ProductDetails {
       //update icon superscript
       showCartQuantity();
     }
+
+    async addToWishList(product){
+      document.querySelector("#addToWishlist").classList.add("button-clicked");
+      this.play('wishlist');
+      this.addProductToCart(product, 'wishlist');
+      showCartQuantity();
+    }
     
-    async removeFromCartHandler(e) {
+    async removeFromCartHandler(e, location='so-cart') {
       const product = await this.dataSource.findProductById(e.target.dataset.id);
-      removeProductFromCart(product);
+      removeProductFromCart(product, location);
       showCartQuantity();
     }
 
@@ -106,6 +120,7 @@ export default class ProductDetails {
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
+      <button id="addToWishlist" data-id="${this.productId}">Add to Wishlist</button>
       </div>
       </section>`
       
@@ -120,13 +135,24 @@ export default class ProductDetails {
 
     //Code for animation for cart icon
     
-    play() {
-      const cart = document.querySelector('.cart');
+    play(location='so-cart') {
+      let cart;
+      if (location == 'so-cart'){
+        cart = document.querySelector('.cart');
+      }else if(location == 'wishlist'){
+        cart = document.querySelector('.wish-list');
+      }
+      
       cart.classList.add('cart-animate');
-      this.stop();
+      this.stop(location);
     }
-    stop() {
-      const cart = document.querySelector('.cart')
+    stop(location='so-cart') {
+      let cart;
+      if (location == 'so-cart'){
+        cart = document.querySelector('.cart');
+      }else if(location == 'wishlist'){
+        cart = document.querySelector('.wish-list');
+      }
       cart.addEventListener('animationend', function(){cart.classList.remove('cart-animate');});
     }
 }

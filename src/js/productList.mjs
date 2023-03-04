@@ -3,7 +3,6 @@ import { renderListWithTemplate } from "./utils.mjs";
 export function productCardTemplate(product) {
     //Use destructoring to enable readable code and pull specific properties from our object
     const {Id, Images, Name, SuggestedRetailPrice, FinalPrice, NameWithoutBrand} = product;
-    debugger;
     if (FinalPrice < SuggestedRetailPrice){
       return `<li class="product-card">
       <a href="/product_pages/index.html?product=${Id}">

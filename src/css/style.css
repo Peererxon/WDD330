@@ -119,6 +119,10 @@ button {
 }
 
 /*Cart icon styles */
+.cart-links{
+  display: flex;
+  flex-direction: row;
+}
 .cart {
   padding-top: 1em;
   position: relative;
@@ -131,7 +135,21 @@ button {
 .cart:hover svg {
   fill: gray;
 }
-.cart-animate {
+.wish-list{
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+}
+.wish-list a:visited{
+  color: black;
+}
+.wish-list a{
+  text-decoration: none;
+}
+.wish-list a:hover{
+  color: gray;
+}
+.cart-animate, .cart-animate.wish-list{
   animation-name: backpackChangeColor;
   animation-timing-function: ease-in;
   animation-duration: 2000ms;
@@ -142,12 +160,15 @@ button {
 @keyframes backpackChangeColor {
   from {
     fill: black;
+    color:black;
   }
   10% {
     fill: #d59656;
+    color:#d59656;
   }
   to {
     fill: black;
+    color:black;
   }
 }
 #cart-items-number {
@@ -166,6 +187,7 @@ button {
   color: black;
   background-color: var(--primary-color);
 }
+
 /* End cart icon styles */
 
 /* product grid styles */
@@ -512,10 +534,10 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover {
+#addToCart:hover, #addToWishlist:hover {
   background-color: grey;
 }
-#addToCart.button-clicked {
+#addToCart.button-clicked, #addToWishlist.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
@@ -560,4 +582,10 @@ button:hover {
 }
 .discount{
   font-weight: bold;
+}
+.product-detail__add{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  margin-top: 45px;
 }
