@@ -63,11 +63,19 @@ export default class productList {
 
         const p = new ProductDetailsModal(product.Result);
 
-        document.querySelector('#quickLookupModal').classList.remove('hide');
+        document
+          .querySelector('#quickLookupModal')
+          .classList.remove('hide-modal');
 
         p.renderProductDetails();
       });
     }
+
+    const closeModalButton = document.querySelector('#modalButton');
+
+    closeModalButton.addEventListener('click', () => {
+      document.querySelector('#quickLookupModal').classList.add('hide-modal');
+    });
   }
 
   filterProductList(list) {

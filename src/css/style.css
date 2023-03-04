@@ -616,6 +616,19 @@ button:hover {
   top: 20%;
   left: 25%;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hide-modal {
+  display: none !important;
+}
+
+#modalButton {
+  margin: 0;
+  width: 50%;
+  font-size: 1rem;
+  align-self: flex-end;
 }
 
 button.quick-button {
