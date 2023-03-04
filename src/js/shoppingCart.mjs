@@ -7,16 +7,22 @@ export default class ShoppingCart {
       this.parentSelector = parentSelector;
     }
 
-    renderCartContents() {
-      const cartItems = getLocalStorage("so-cart");
+    renderCartContents(location='so-cart') {
+      const cartItems = getLocalStorage(location);
       const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
       
-
-    
       document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
-      this.cartTotal();
-      let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
-      deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
+      this.cartTotal(location);
+      if (location=='so-cart'){
+        let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+        deleteBtns.forEach(item => {item.addEventListener('click', () => {this.removeProductFromCart(`${item.value}`)})});
+      }else if (location=='wishlist'){
+        let deleteBtns = document.querySelectorAll(".cart-card_delete_btn");
+        deleteBtns.forEach(item => {item.addEventListener('click', () => {debugger;this.removeProductFromCart(`${item.value}`,'wishlist')})});
+        let quantityInputs = document.querySelectorAll(".cart-card__quantity");
+        quantityInputs.forEach((node)=>{node.style='display:none;'})
+      }
+      
       
       // adding update quantity functionality to our cart
 
@@ -64,10 +70,10 @@ export default class ShoppingCart {
    
     //The cartTotal function calculates the sum of the cost of items in the cart
 
-    cartTotal() {
+    cartTotal(location='so-cart') {
       //save the items array in local storage to the variable 'cart'
 
-      let cartItems = getLocalStorage("so-cart");
+      let cartItems = getLocalStorage(location);
     
       //if there is an item in the cart, calculate and show the total
 
@@ -100,7 +106,7 @@ export default class ShoppingCart {
       
     }
 
-    removeProductFromCart(productId) {
+    removeProductFromCart(productId, location='so-cart') {
       // find the id in the local storage "so-cart" object and remove the first one with the same id as given function to delete when match is found
 
       function rem(itemInCart, idToDelete) {
@@ -109,23 +115,23 @@ export default class ShoppingCart {
       }
       // variable to hold the array of items in cart
 
-      let ar = JSON.parse(localStorage.getItem("so-cart"));
+      let ar = JSON.parse(localStorage.getItem(location));
       // loop to find match
 
       for (const itemInCart of ar){ if(rem(itemInCart, productId)){break;}};
       // set local storage to new array
 
-      setLocalStorage("so-cart", ar)
+      setLocalStorage(location, ar)
       // render the cart again now that the item is removed
       
-      this.renderCartContents();
+      this.renderCartContents(location);
       showCartQuantity();
     }
 
-    updateItemQuantity(cart, id, quantity){
+    updateItemQuantity(cart, id, quantity, location='so-cart'){
       let Id = id;
       let itemToUpdate = cart.findIndex(item => item.Id === Id);
       cart[itemToUpdate].Quantity = parseInt(quantity);
-      setLocalStorage("so-cart", cart);
+      setLocalStorage(location, cart);
     }
 }

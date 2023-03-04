@@ -511,14 +511,13 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover {
+#addToCart:hover, #addToWishlist:hover {
   background-color: grey;
 }
-#addToCart.button-clicked {
+#addToCart.button-clicked, #addToWishlist.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
-
 .hide {
   display: none;
 }
@@ -633,4 +632,10 @@ button:hover {
 
 button.quick-button {
   font-size: 1rem;
+}
+.product-detail__add{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  margin-top: 45px;
 }

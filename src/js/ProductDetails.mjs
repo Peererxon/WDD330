@@ -16,43 +16,47 @@ export default class ProductDetails {
 
   async init() {
     //get details for current product
-    this.product = await this.dataSource.findProductById(this.productId);
-
+    this.product = await this.dataSource.findProductById(this.productId)
+  
     //render HTML with product details
     this.renderProductDetails();
-    //add listener to cart button
-    document
-      .getElementById('addToCart')
-      .addEventListener('click', this.addToCartHandler.bind(this));
+  //add listener to cart button
+    document.getElementById("addToCart") // Why is this so complicated? The product information is already in this.product.
+    .addEventListener("click", this.addToCartHandler.bind(this));
+    document.querySelector("#addToWishlist")
+    .addEventListener('click', (e)=>{
+      this.addToWishList(this.product);
+    });
 
-    //Code for breadcrumbs (href tags)
-    const breadcrumb_element = document.getElementById(
-      'product_page_breadcrumb'
-    );
-    breadcrumb_element.href = this.url;
-    const product_category = this.product.Category;
-    document.getElementById(
-      'list_page_breadcrumb'
-    ).href = `../product-listing/index.html?category=${product_category}`;
+  //Code for breadcrumbs (href tags)
+  const breadcrumb_element = document.getElementById("product_page_breadcrumb");
+  breadcrumb_element.href = this.url;
+  const product_category = this.product.Category;
+  document.getElementById("list_page_breadcrumb").href = `../product-listing/index.html?category=${product_category}`;
   }
 
-  addProductToCart(product) {
-    let cart = getLocalStorage('so-cart');
+  addProductToCart(product, location='so-cart') {
+    let cart = getLocalStorage(location);
     if (cart === null) {
       cart = [];
     }
     // adding functionality for quantity
     let item = this.handleQuantity(product, cart);
+    product.Quantity = 1;
     // pushing item to cart
-    if (item['newItem']) {
+    if(item["newItem"]){
       cart.push(product);
     } else {
       let Id = product.Id;
-      let originalItemAdded = cart.findIndex((item) => item.Id === Id);
-      cart[originalItemAdded].Quantity = item['newQunatity'];
+      let originalItemAdded = cart.findIndex(item => item.Id === Id);
+      cart[originalItemAdded].Quantity = item["newQuantity"];
     }
-    setLocalStorage('so-cart', cart);
-    alertMessage('The item was added to your cart successfully.');
+    setLocalStorage(location, cart);
+    if (location == 'so-cart'){
+      alertMessage("The item was added to your cart successfully.")
+    }else{
+      alertMessage(`The item was added to the ${location} successfully.`)
+    }
   }
 
   handleQuantity(product, cart) {
@@ -139,8 +143,8 @@ export default class ProductDetails {
     //create product string literal
 
     // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
-    if (this.product.SuggestedRetailPrice != this.product.finalPrice) {
-      product_string += `<p class="discount">Sale: ${discount}% Off</p>
+    if (this.product.SuggestedRetailPrice != this.product.FinalPrice) {
+      product_string += `<p class="discount">Sale: ${discount}% Off. That's $${Math.round(this.product.SuggestedRetailPrice - this.product.FinalPrice)}!</p>
         <p class="product-card__price">Was: <span class="productListPrice">$${this.product.SuggestedRetailPrice}</span>
          Now: <span class="productFinalPrice">$${this.product.FinalPrice}</span></p>`;
     } else {
@@ -150,6 +154,7 @@ export default class ProductDetails {
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
+      <button id="addToWishlist" data-id="${this.productId}">Add to Wishlist</button>
       </div>
       </section>`;
 
@@ -164,6 +169,13 @@ export default class ProductDetails {
     return (
       100 - (this.product.ListPrice / this.product.SuggestedRetailPrice) * 100
     );
+  }
+
+  async addToWishList(product){
+    document.querySelector("#addToWishlist").classList.add("button-clicked");
+    this.play('wishlist');
+    this.addProductToCart(product, 'wishlist');
+    showCartQuantity();
   }
 
   //Code for animation for cart icon
