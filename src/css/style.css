@@ -166,6 +166,25 @@ button {
   color: black;
   background-color: var(--primary-color);
 }
+
+.wish-list{
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+}
+.wish-list a:visited{
+  color: black;
+}
+.wish-list a{
+  text-decoration: none;
+}
+.wish-list a:hover{
+  color: gray;
+}
+.cart-links{
+  display: flex;
+  flex-direction: row;
+}
 /* End cart icon styles */
 
 /* product grid styles */
@@ -511,14 +530,13 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover {
+#addToCart:hover, #addToWishlist:hover {
   background-color: grey;
 }
-#addToCart.button-clicked {
+#addToCart.button-clicked, #addToWishlist.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
-
 .hide {
   display: none;
 }
@@ -633,4 +651,10 @@ button:hover {
 
 button.quick-button {
   font-size: 1rem;
+}
+.product-detail__add{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  margin-top: 45px;
 }

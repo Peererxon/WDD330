@@ -22,8 +22,11 @@ export default class ProductDetails {
     this.renderProductDetails();
     //add listener to cart button
     document
-      .getElementById('addToCart')
+      .getElementById('addToCart') // Why is this so complicated? The product information is already in this.product.
       .addEventListener('click', this.addToCartHandler.bind(this));
+    document.querySelector('#addToWishlist').addEventListener('click', (e) => {
+      this.addToWishList(this.product);
+    });
 
     //Code for breadcrumbs (href tags)
     const breadcrumb_element = document.getElementById(
@@ -36,8 +39,9 @@ export default class ProductDetails {
     ).href = `../product-listing/index.html?category=${product_category}`;
   }
 
-  addProductToCart(product) {
-    let cart = getLocalStorage('so-cart');
+  addProductToCart(product, location = 'so-cart') {
+    debugger;
+    let cart = getLocalStorage(location);
     if (cart === null) {
       cart = [];
     }
@@ -49,10 +53,14 @@ export default class ProductDetails {
     } else {
       let Id = product.Id;
       let originalItemAdded = cart.findIndex((item) => item.Id === Id);
-      cart[originalItemAdded].Quantity = item['newQunatity'];
+      cart[originalItemAdded].Quantity = item['newQuantity'];
     }
-    setLocalStorage('so-cart', cart);
-    alertMessage('The item was added to your cart successfully.');
+    setLocalStorage(location, cart);
+    if (location == 'so-cart') {
+      alertMessage('The item was added to your cart successfully.');
+    } else {
+      alertMessage(`The item was added to the ${location} successfully.`);
+    }
   }
 
   handleQuantity(product, cart) {
@@ -73,7 +81,7 @@ export default class ProductDetails {
       product.Quantity = 1;
     }
     // console.log("1.", typeof product.Quantity, product.Quantity);
-    return { newItem: newItem, newQunatity: newQuantity };
+    return { newItem: newItem, newQuantity: newQuantity };
   }
 
   async addToCartHandler(e) {
@@ -146,10 +154,16 @@ export default class ProductDetails {
     //create product string literal
 
     // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
-    if (this.product.SuggestedRetailPrice != this.product.finalPrice) {
-      product_string += `<p class="discount">Sale: ${discount}% Off</p>
-        <p class="product-card__price">Was: <span class="productListPrice">$${this.product.SuggestedRetailPrice}</span>
-         Now: <span class="productFinalPrice">$${this.product.FinalPrice}</span></p>`;
+    if (this.product.SuggestedRetailPrice != this.product.FinalPrice) {
+      product_string += `<p class="discount">Sale: ${discount}% Off. You save $${Math.round(
+        this.product.SuggestedRetailPrice - this.product.FinalPrice
+      )} dollars!</p>
+        <p class="product-card__price">Was: <span class="productListPrice">$${
+          this.product.SuggestedRetailPrice
+        }</span>
+         Now: <span class="productFinalPrice">$${
+           this.product.FinalPrice
+         }</span></p>`;
     } else {
       product_string += `<p class="product-card__price">$${this.product.FinalPrice}</p>`;
     }
@@ -157,6 +171,7 @@ export default class ProductDetails {
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
+      <button id="addToWishlist" data-id="${this.productId}">Add to Wishlist</button>
       </div>
       </section>`;
 
@@ -187,5 +202,11 @@ export default class ProductDetails {
     cart.addEventListener('animationend', function () {
       cart.classList.remove('cart-animate');
     });
+  }
+
+  async addToWishList(product) {
+    document.querySelector('#addToWishlist').classList.add('button-clicked');
+    this.addProductToCart(product, 'wishlist');
+    showCartQuantity();
   }
 }
