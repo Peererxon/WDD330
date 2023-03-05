@@ -98,33 +98,40 @@ export default class ProductDetails {
   renderProductDetails() {
     let product_string;
 
-    const extraImageLenght = this.product.Images.ExtraImages.length;
+    if (this.product.Images.ExtraImages) {
+      if (
+        'ExtraImages' in this.product.Images &&
+        this.product.Images.ExtraImages.length > 0
+      ) {
+        product_string = `<section class="product-detail">
+        <h3>${this.product.Brand.Name}</h3>
+        <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+        <!-- slider container -->
+        <div class="slider">
+          <div class="slide">
+             <img
+              src="${this.product.Images.PrimaryMedium}"
+              alt="${this.product.Name}"/>
+          </div>`;
 
-    if ('ExtraImages' in this.product.Images && extraImageLenght > 0) {
-      product_string = `<section class="product-detail">
-      <h3>${this.product.Brand.Name}</h3>
-      <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-      <!-- slider container -->
-      <div class="slider">
-        <div class="slide">
-           <img
-            src="${this.product.Images.PrimaryMedium}"
-            alt="${this.product.Name}"/>
-        </div>`;
-
-      // This loop adds the HTML to render the extra images into the image carousel
-      for (let index = 0; index < extraImageLenght; index++) {
-        product_string += `<div class="slide">
-                              <img
-                                src="${this.product.Images.ExtraImages[index].Src}"
-                                alt="${this.product.Images.ExtraImages[index].Title}"
-                              />
-                            </div>`;
+        // This loop adds the HTML to render the extra images into the image carousel
+        for (
+          let index = 0;
+          index < this.product.Images.ExtraImages.length;
+          index++
+        ) {
+          product_string += `<div class="slide">
+                                <img
+                                  src="${this.product.Images.ExtraImages[index].Src}"
+                                  alt="${this.product.Images.ExtraImages[index].Title}"
+                                />
+                              </div>`;
+        }
+        product_string += `<!-- Control buttons -->
+        <button class="btn btn-next">></button>
+        <button class="btn btn-prev"><</button>
+      </div>`;
       }
-      product_string += `<!-- Control buttons -->
-      <button class="btn btn-next">></button>
-      <button class="btn btn-prev"><</button>
-    </div>`;
     } else {
       product_string = `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
@@ -155,7 +162,9 @@ export default class ProductDetails {
 
     document.getElementById('product_details').innerHTML = product_string;
 
-    initCarousel();
+    if (this.product.Images.ExtraImages) {
+      initCarousel();
+    }
   }
 
   //Code to calculate discounts for products
