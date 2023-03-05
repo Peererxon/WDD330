@@ -667,10 +667,15 @@ button.quick-button {
 #registerForm {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
 }
 
 #registerForm div {
   margin-bottom: 1rem;
+  /* display: flex;
+  flex-direction: column;
+  justify-items: center; */
 }
 
 #registerForm div label {
