@@ -39,8 +39,8 @@ export default class ProductDetails {
     ).href = `../product-listing/index.html?category=${product_category}`;
   }
 
-  addProductToCart(product, location = 'so-cart') {
-    debugger;
+  addProductToCart(product, location='so-cart') {
+    product = this.handleColor(product);
     let cart = getLocalStorage(location);
     if (cart === null) {
       cart = [];
@@ -82,6 +82,22 @@ export default class ProductDetails {
     }
     // console.log("1.", typeof product.Quantity, product.Quantity);
     return { newItem: newItem, newQuantity: newQuantity };
+  }
+
+  // Returns the product, so use the = operator
+  handleColor(product){
+    debugger;
+    let node = document.querySelector('#color-select');
+    if (node == null){
+      node = document.querySelector('.cart-card__color');
+      if (node == null){
+        return product;
+      }
+      product.colorSelected = node.textContent;
+      return product;
+    }
+    product.colorSelected = node.value;
+     return product;
   }
 
   async addToCartHandler(e) {
@@ -167,7 +183,7 @@ export default class ProductDetails {
     } else {
       product_string += `<p class="product-card__price">$${this.product.FinalPrice}</p>`;
     }
-    product_string += ` <p class="product__color">${this.product.Colors[0].ColorName}</p>
+    product_string += ` <div class="product__color">${this.product.Colors[0].ColorName}</div>
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
       <button id="addToCart" data-id="${this.productId}">Add to Cart</button>
@@ -176,6 +192,22 @@ export default class ProductDetails {
       </section>`;
 
     document.getElementById('product_details').innerHTML = product_string;
+    
+
+    // Add color select
+    // For some reason I couldn't get this to work in the formatted string above, so I'm adding it afterwards
+    let colorNode = document.querySelector(".product__color")
+    colorNode.textContent = "";
+    let selectNode = document.createElement('select');
+    selectNode.id = 'color-select';
+    for (let i = 0; i < this.product.Colors.length; i++){
+      let optionNode = document.createElement('option');
+      optionNode.value = this.product.Colors[i].ColorName;
+      optionNode.textContent = optionNode.value;
+      selectNode.append(optionNode);
+    }
+    colorNode.append(selectNode);
+    // End color select
 
     if (this.product.Images.ExtraImages) {
       initCarousel();
@@ -204,8 +236,9 @@ export default class ProductDetails {
     });
   }
 
-  async addToWishList(product) {
-    document.querySelector('#addToWishlist').classList.add('button-clicked');
+  async addToWishList(product){
+    product = this.handleColor(product);
+    document.querySelector("#addToWishlist").classList.add("button-clicked");
     this.addProductToCart(product, 'wishlist');
     showCartQuantity();
   }

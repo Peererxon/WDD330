@@ -1,5 +1,5 @@
 import ShoppingCart from "./shoppingCart.mjs";
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, showCartQuantity} from "./utils.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
 const cart = new ShoppingCart("so-cart", ".product-list");
@@ -19,4 +19,5 @@ document.querySelector("#check-out").addEventListener("click", ()=>{
 
     setLocalStorage('wishlist',[]);
     cart.renderCartContents('wishlist');
+    showCartQuantity();
 })

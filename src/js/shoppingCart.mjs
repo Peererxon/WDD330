@@ -61,7 +61,7 @@ export default class ShoppingCart {
       <a href="${productDetailsPage}">
         <h2 class="card__name">${item.Name}</h2>
       </a>
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+      <p class="cart-card__color">${item.colorSelected}</p>
       <p class="cart-card__quantity"><label for="qty">qty: </label><input name="qty" id="${item.Id}" class="qty-in-cart" type="number" step="1" pattern="^[2-9]|[1-9][0-9]+$" value="${parseInt(item.Quantity)}"></p>
       <button class="cart-card_delete_btn" value="${item.Id}">X</button>
       <p class="cart-card__price">$${item.FinalPrice}</p>

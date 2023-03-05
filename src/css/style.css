@@ -658,3 +658,6 @@ button.quick-button {
   flex-direction: row;
   margin-top: 45px;
 }
+#color-select{
+  font-size: 1em;
+}
