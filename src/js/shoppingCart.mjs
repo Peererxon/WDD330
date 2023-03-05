@@ -24,6 +24,7 @@ export default class ShoppingCart {
         document.querySelector('.hide-total').prepend(document.createElement('div'));
         document.querySelector('.cart-total').style='display:none;';
       }
+
       
       
       // adding update quantity functionality to our cart
@@ -54,7 +55,7 @@ export default class ShoppingCart {
       <li class="cart-card divider">
       <a href="${productDetailsPage}" class="cart-card__image">
         <img class="cart_img"
-          src="${item.Images.PrimaryMedium}"
+          src="${item.colorSelectedImgSrc}"
           alt="${item.Name}"
         />
       </a>

@@ -86,19 +86,22 @@ export default class ProductDetails {
 
   // Returns the product, so use the = operator
   handleColor(product){
-    // For the product details page
     let node = document.querySelector('#color-select');
+
+    // If we are on the wishlist page, just return it. color info is already there
     if (node == null){
-      // For the wishlist page
-      node = document.querySelector('.cart-card__color');
-      if (node == null){
-        return product;
-      }
-      product.colorSelected = node.textContent;
       return product;
     }
+
+    // Otherwise, add the color info
     product.colorSelected = node.value;
-     return product;
+
+    for (let i = 0; i < product.Colors.length; i++){
+      if (product.Colors[i].ColorName == product.colorSelected){
+        product.colorSelectedImgSrc = product.Colors[i].ColorPreviewImageSrc;
+      }
+    }
+    return product;
   }
 
   async addToCartHandler(e) {
