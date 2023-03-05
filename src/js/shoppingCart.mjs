@@ -21,6 +21,8 @@ export default class ShoppingCart {
         deleteBtns.forEach(item => {item.addEventListener('click', () => {debugger;this.removeProductFromCart(`${item.value}`,'wishlist')})});
         let quantityInputs = document.querySelectorAll(".cart-card__quantity");
         quantityInputs.forEach((node)=>{node.style='display:none;'})
+        document.querySelector('.hide-total').prepend(document.createElement('div'));
+        document.querySelector('.cart-total').style='display:none;';
       }
       
       

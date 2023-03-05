@@ -36,13 +36,13 @@ export default class ProductDetails {
   }
 
   addProductToCart(product, location='so-cart') {
+    debugger;
     let cart = getLocalStorage(location);
     if (cart === null) {
       cart = [];
     }
     // adding functionality for quantity
     let item = this.handleQuantity(product, cart);
-    product.Quantity = 1;
     // pushing item to cart
     if(item["newItem"]){
       cart.push(product);
@@ -57,6 +57,7 @@ export default class ProductDetails {
     }else{
       alertMessage(`The item was added to the ${location} successfully.`)
     }
+    
   }
 
   handleQuantity(product, cart) {
@@ -77,7 +78,7 @@ export default class ProductDetails {
       product.Quantity = 1;
     }
     // console.log("1.", typeof product.Quantity, product.Quantity);
-    return { newItem: newItem, newQunatity: newQuantity };
+    return { newItem: newItem, newQuantity: newQuantity };
   }
 
   async addToCartHandler(e) {
@@ -144,7 +145,7 @@ export default class ProductDetails {
 
     // Why add another suggestedRetailPrice? A variable that did this already existed. Mabey it was in the downloaded JSON.
     if (this.product.SuggestedRetailPrice != this.product.FinalPrice) {
-      product_string += `<p class="discount">Sale: ${discount}% Off. That's $${Math.round(this.product.SuggestedRetailPrice - this.product.FinalPrice)}!</p>
+      product_string += `<p class="discount">Sale: ${discount}% Off. You save $${Math.round(this.product.SuggestedRetailPrice - this.product.FinalPrice)} dollars!</p>
         <p class="product-card__price">Was: <span class="productListPrice">$${this.product.SuggestedRetailPrice}</span>
          Now: <span class="productFinalPrice">$${this.product.FinalPrice}</span></p>`;
     } else {
@@ -171,13 +172,6 @@ export default class ProductDetails {
     );
   }
 
-  async addToWishList(product){
-    document.querySelector("#addToWishlist").classList.add("button-clicked");
-    this.play('wishlist');
-    this.addProductToCart(product, 'wishlist');
-    showCartQuantity();
-  }
-
   //Code for animation for cart icon
 
   play() {
@@ -190,5 +184,11 @@ export default class ProductDetails {
     cart.addEventListener('animationend', function () {
       cart.classList.remove('cart-animate');
     });
+  }
+
+  async addToWishList(product){
+    document.querySelector("#addToWishlist").classList.add("button-clicked");
+    this.addProductToCart(product, 'wishlist');
+    showCartQuantity();
   }
 }

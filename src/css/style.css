@@ -166,6 +166,25 @@ button {
   color: black;
   background-color: var(--primary-color);
 }
+
+.wish-list{
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+}
+.wish-list a:visited{
+  color: black;
+}
+.wish-list a{
+  text-decoration: none;
+}
+.wish-list a:hover{
+  color: gray;
+}
+.cart-links{
+  display: flex;
+  flex-direction: row;
+}
 /* End cart icon styles */
 
 /* product grid styles */
