@@ -167,21 +167,35 @@ button {
   background-color: var(--primary-color);
 }
 
-.wish-list{
+.registerLink {
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+  text-decoration: none;
+}
+
+.registerLink a {
+  padding-top: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+}
+
+.wish-list {
   padding-top: 8px;
   padding-right: 5px;
   font-size: 2em;
 }
-.wish-list a:visited{
+.wish-list a:visited {
   color: black;
 }
-.wish-list a{
+.wish-list a {
   text-decoration: none;
 }
-.wish-list a:hover{
+.wish-list a:hover {
   color: gray;
 }
-.cart-links{
+.cart-links {
   display: flex;
   flex-direction: row;
 }
@@ -530,10 +544,12 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover, #addToWishlist:hover {
+#addToCart:hover,
+#addToWishlist:hover {
   background-color: grey;
 }
-#addToCart.button-clicked, #addToWishlist.button-clicked {
+#addToCart.button-clicked,
+#addToWishlist.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
@@ -652,16 +668,16 @@ button:hover {
 button.quick-button {
   font-size: 1rem;
 }
-.product-detail__add{
+.product-detail__add {
   display: flex;
   gap: 10px;
   flex-direction: row;
   margin-top: 45px;
 }
-#color-select{
+#color-select {
   font-size: 1em;
 }
-.order__card{
+.order__card {
   border: 1px solid black;
   background-color: #f8f8ff;
   margin-bottom: 20px;
@@ -672,10 +688,28 @@ button.quick-button {
   font-size: 1em;
   padding: 20px;
 }
-#admin-form input{
+#admin-form input {
   display: block;
   margin-bottom: 20px;
   margin-left: 30px;
   font-size: 1em;
   padding: 3px;
+}
+
+#registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+#registerForm div {
+  margin-bottom: 1rem;
+  /* display: flex;
+  flex-direction: column;
+  justify-items: center; */
+}
+
+#registerForm div label {
+  display: block;
 }
