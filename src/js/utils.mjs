@@ -1,4 +1,5 @@
 import Alert from './alert.mjs';
+import ProductDetailsModal from './ProductDetailsModal.mjs';
 
 // wrapper for querySelector...returns matching element
 
@@ -46,6 +47,36 @@ export function renderListWithTemplate(
   } else {
     parentElement.insertAdjacentHTML(position, ListArrayHtml.join(''));
   }
+  // Setting click event to trigger quick lookup modal
+  const buttons = document.querySelectorAll('.quick-button');
+
+  const buttonsArrayLenght = buttons.length;
+
+  for (let index = 0; index < buttonsArrayLenght; index++) {
+    buttons[index].addEventListener('click', async () => {
+      const productId = buttons[index].getAttribute('data-src');
+
+      const response = await fetch(
+        `http://server-nodejs.cit.byui.edu:3000/product/${productId}`
+      );
+
+      const product = await response.json();
+
+      const p = new ProductDetailsModal(product.Result);
+
+      document
+        .querySelector('#quickLookupModal')
+        .classList.remove('hide-modal');
+
+      p.renderProductDetails();
+    });
+  }
+
+  const closeModalButton = document.querySelector('#modalButton');
+
+  closeModalButton.addEventListener('click', () => {
+    document.querySelector('#quickLookupModal').classList.add('hide-modal');
+  });
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {

@@ -43,39 +43,39 @@ export default class productList {
     quantity_element.href = this.url;
   }
 
-  renderList(productList) {
-    renderListWithTemplate(productCardTemplate, this.listElement, productList);
+  renderList(productList2) {
+    renderListWithTemplate(productCardTemplate, this.listElement, productList2);
 
     // Setting click event to trigger quick lookup modal
-    const buttons = document.querySelectorAll('.quick-button');
+    // const buttons = document.querySelectorAll('.quick-button');
 
-    const buttonsArrayLenght = buttons.length;
+    // const buttonsArrayLenght = buttons.length;
 
-    for (let index = 0; index < buttonsArrayLenght; index++) {
-      buttons[index].addEventListener('click', async () => {
-        const productId = buttons[index].getAttribute('data-src');
+    // for (let index = 0; index < buttonsArrayLenght; index++) {
+    //   buttons[index].addEventListener('click', async () => {
+    //     const productId = buttons[index].getAttribute('data-src');
 
-        const response = await fetch(
-          `http://server-nodejs.cit.byui.edu:3000/product/${productId}`
-        );
+    //     const response = await fetch(
+    //       `http://server-nodejs.cit.byui.edu:3000/product/${productId}`
+    //     );
 
-        const product = await response.json();
+    //     const product = await response.json();
 
-        const p = new ProductDetailsModal(product.Result);
+    //     const p = new ProductDetailsModal(product.Result);
 
-        document
-          .querySelector('#quickLookupModal')
-          .classList.remove('hide-modal');
+    //     document
+    //       .querySelector('#quickLookupModal')
+    //       .classList.remove('hide-modal');
 
-        p.renderProductDetails();
-      });
-    }
+    //     p.renderProductDetails();
+    //   });
+    // }
 
-    const closeModalButton = document.querySelector('#modalButton');
+    // const closeModalButton = document.querySelector('#modalButton');
 
-    closeModalButton.addEventListener('click', () => {
-      document.querySelector('#quickLookupModal').classList.add('hide-modal');
-    });
+    // closeModalButton.addEventListener('click', () => {
+    //   document.querySelector('#quickLookupModal').classList.add('hide-modal');
+    // });
   }
 
   filterProductList(list) {
