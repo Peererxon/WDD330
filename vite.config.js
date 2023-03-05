@@ -15,7 +15,8 @@ export default defineConfig({
         product: resolve(__dirname, 'src/product_pages/index.html'),
         directory: resolve(__dirname, 'src/product-listing/index.html'),
         search: resolve(__dirname, 'src/product-listing/product-search.html'),
-        wishlist: resolve(__dirname, 'src/cart/wishlist.html')
+        wishlist: resolve(__dirname, 'src/cart/wishlist.html'),
+        registration: resolve(__dirname, 'src/registration/index.html')
       }
     }
   }
