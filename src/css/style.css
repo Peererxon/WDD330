@@ -167,6 +167,20 @@ button {
   background-color: var(--primary-color);
 }
 
+.registerLink {
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+  text-decoration: none;
+}
+
+.registerLink a {
+  padding-top: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+}
+
 .wish-list {
   padding-top: 8px;
   padding-right: 5px;
