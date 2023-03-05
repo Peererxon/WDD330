@@ -103,9 +103,9 @@ export default class ProductDetails {
   renderProductDetails() {
     let product_string;
 
-    const extraImageLenght = this.product.Images.ExtraImages.length;
+    const extraImageLength = this.product.Images.ExtraImages.length;
 
-    if ('ExtraImages' in this.product.Images && extraImageLenght > 0) {
+    if ('ExtraImages' in this.product.Images && extraImageLength > 0) {
       product_string = `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
@@ -118,7 +118,7 @@ export default class ProductDetails {
         </div>`;
 
       // This loop adds the HTML to render the extra images into the image carousel
-      for (let index = 0; index < extraImageLenght; index++) {
+      for (let index = 0; index < extraImageLength; index++) {
         product_string += `<div class="slide">
                               <img
                                 src="${this.product.Images.ExtraImages[index].Src}"

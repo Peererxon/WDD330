@@ -1,1 +1,0 @@
-// Functionality has been replaced by productDetails.mjs
