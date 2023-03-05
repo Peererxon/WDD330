@@ -68,7 +68,7 @@ export default class ProductDetails {
     let newQuantity = { Quantity: 0 };
     for (let i in cart) {
       // console.log("3.", cart[i]);
-      if (cart[i].Id === product.Id) {
+      if (cart[i].Id === product.Id && cart[i].colorSelected == product.colorSelected) {
         // console.log("5. ", cart[i].Quantity, typeof product.Quantity, product.Quantity);
         cart[i].Quantity = parseInt(cart[i].Quantity) + 1;
         newQuantity = cart[i].Quantity;
@@ -86,9 +86,10 @@ export default class ProductDetails {
 
   // Returns the product, so use the = operator
   handleColor(product){
-    debugger;
+    // For the product details page
     let node = document.querySelector('#color-select');
     if (node == null){
+      // For the wishlist page
       node = document.querySelector('.cart-card__color');
       if (node == null){
         return product;
