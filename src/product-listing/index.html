@@ -22,7 +22,25 @@
         >
       </li>
     </ul>
+
+    <div id="quickLookupModal" class="hide-modal">
+      <button id="modalButton">Close X</button>
+      <div id="quick-modal-product-details"></div>
+    </div>
+
     <main class="divider">
+      <section class="sort">
+        <form>
+          <label for="sort-by">Sort by</label>
+          <select id="sort-by">
+            <option value="Name">Name</option>
+            <option value="Price">Price</option>
+          </select>
+          <div></div>
+          <label for="order">Ascending</label>
+          <input id="order" type="checkbox" />
+        </form>
+      </section>
       <section class="products">
         <h2>Top Products: <span class="title"></span></h2>
         <ul class="product-list"></ul>
@@ -44,5 +62,6 @@
     <footer id="footer"></footer>
     <script src="../js/main.js" type="module"></script>
     <script src="../js/productListing.mjs" type="module"></script>
+    <script src="../js/modal.js" type="module"></script>
   </body>
 </html>

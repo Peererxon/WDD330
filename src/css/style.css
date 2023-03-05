@@ -166,6 +166,25 @@ button {
   color: black;
   background-color: var(--primary-color);
 }
+
+.wish-list{
+  padding-top: 8px;
+  padding-right: 5px;
+  font-size: 2em;
+}
+.wish-list a:visited{
+  color: black;
+}
+.wish-list a{
+  text-decoration: none;
+}
+.wish-list a:hover{
+  color: gray;
+}
+.cart-links{
+  display: flex;
+  flex-direction: row;
+}
 /* End cart icon styles */
 
 /* product grid styles */
@@ -237,7 +256,6 @@ button {
 }
 .product-card a {
   width: 100%;
-  height: 100%;
   display: block;
 }
 
@@ -512,14 +530,13 @@ button:hover {
   color: #008800;
 }
 
-#addToCart:hover {
+#addToCart:hover, #addToWishlist:hover {
   background-color: grey;
 }
-#addToCart.button-clicked {
+#addToCart.button-clicked, #addToWishlist.button-clicked {
   /*Feel free to play around with this value*/
   background-color: var(--tertiary-color);
 }
-
 .hide {
   display: none;
 }
@@ -533,4 +550,114 @@ button:hover {
 .newsletter-submit-button {
   margin: 0;
   font-size: 1rem;
+}
+.sort form div {
+  display: block;
+}
+.sort form select {
+  font-size: 1rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+}
+
+.comments {
+  margin: 1rem 0;
+}
+
+.comment {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comment textarea {
+  width: 100%;
+}
+
+.slider {
+  width: 100%;
+  max-width: 800px;
+  height: 350px;
+  position: relative;
+  overflow: hidden; /* <===  */
+  border-radius: 15px;
+}
+
+.slide {
+  width: 100%;
+  max-width: 800px;
+  height: 350px;
+  position: absolute;
+  transition: all 0.5s;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  z-index: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn:active {
+  transform: scale(1.1);
+}
+
+.btn-prev {
+  top: 45%;
+  left: 2%;
+}
+
+.btn-next {
+  top: 45%;
+  right: 2%;
+}
+
+#quickLookupModal {
+  position: fixed;
+  width: 50vw;
+  height: 50vh;
+  background: #d3d3d3ff;
+  border: 1px solid black;
+  top: 20%;
+  left: 25%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.hide-modal {
+  display: none !important;
+}
+
+#modalButton {
+  margin: 0;
+  width: 50%;
+  font-size: 1rem;
+  align-self: flex-end;
+}
+
+button.quick-button {
+  font-size: 1rem;
+}
+.product-detail__add{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  margin-top: 45px;
+}
+#color-select{
+  font-size: 1em;
 }
