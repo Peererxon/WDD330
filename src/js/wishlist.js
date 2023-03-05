@@ -17,6 +17,6 @@ document.querySelector("#check-out").addEventListener("click", ()=>{
         })
     }
 
-    setLocalStorage('wishlist',[])
-    document.querySelector("#check-out-link").href = "index.html";
+    setLocalStorage('wishlist',[]);
+    cart.renderCartContents('wishlist');
 })
