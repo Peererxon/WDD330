@@ -83,4 +83,14 @@ export default class ExternalServices {
       );
     }
   }
+  async grabOrders(token){
+    let response = await fetch(`http://server-nodejs.cit.byui.edu:3000/orders`,{
+      method:"GET",
+      headers: {
+        'Authorization': `Bearer ${token}`
+      } 
+    });
+    let myJSON = await response.json();
+    return myJSON;
+  }
 }
