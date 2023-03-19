@@ -1,5 +1,5 @@
-import { renderListWithTemplate } from './utils.mjs';
-import ProductDetailsModal from './ProductDetailsModal.mjs';
+import { renderListWithTemplate } from "./utils.mjs";
+import ProductDetailsModal from "./ProductDetailsModal.mjs";
 
 export function productCardTemplate(product) {
   //Use destructoring to enable readable code and pull specific properties from our object
@@ -28,17 +28,28 @@ export default class productList {
 
   async init() {
     let productList = await this.dataSource.getData(this.category);
-    productList = this.sortProductList(productList);
+    try {
+      productList = this.sortProductList(productList);
+      console.log(
+        "🚀 ~ file: productList.mjs:33 ~ productList ~ init ~ productList:",
+        productList
+      );
+    } catch (error) {
+      console.log(
+        "🚀 ~ file: productList.mjs:35 ~ productList ~ init ~ error:",
+        error
+      );
+    }
 
     this.renderList(productList);
 
-    document.querySelector('.title').innerHTML =
+    document.querySelector(".title").innerHTML =
       this.category[0].toUpperCase() + this.category.substring(1);
 
     //Code for breadcrumbs (product quantity in the list)
 
     const product_quantity = productList.length;
-    const quantity_element = document.getElementById('quantity');
+    const quantity_element = document.getElementById("quantity");
     quantity_element.innerHTML = `Product Category > ${product_quantity} items`;
     quantity_element.href = this.url;
   }
@@ -86,9 +97,9 @@ export default class productList {
   }
 
   sortProductList(list) {
-    let sortBy = document.querySelector('#sort-by').value;
-    let ascending = document.querySelector('#order').checked;
-    if (sortBy == 'Name') {
+    let sortBy = document.querySelector("#sort-by").value;
+    let ascending = document.querySelector("#order").checked;
+    if (sortBy == "Name") {
       list.sort((a, b) => {
         let returnValue = 0;
         if (a.NameWithoutBrand > b.NameWithoutBrand) {
@@ -102,7 +113,7 @@ export default class productList {
         return returnValue;
       });
     }
-    if (sortBy == 'Price') {
+    if (sortBy == "Price") {
       list.sort((a, b) => {
         let returnValue = 0;
         if (a.FinalPrice < b.FinalPrice) {
