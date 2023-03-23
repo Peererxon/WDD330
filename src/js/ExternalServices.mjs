@@ -1,15 +1,15 @@
-import { setLocalStorage } from './utils.mjs';
+import { setLocalStorage } from "./utils.mjs";
 
-const baseURL = 'http://server-nodejs.cit.byui.edu:3000/';
-const checkoutURL = 'http://server-nodejs.cit.byui.edu:3000/checkout';
-let categories = ['tents', 'backpacks', 'hammocks', 'sleeping-bags'];
+const baseURL = "https://wdd330-backend.onrender.com/";
+const checkoutURL = "https://wdd330-backend.onrender.com/checkout";
+let categories = ["tents", "backpacks", "hammocks", "sleeping-bags"];
 
 async function convertToJson(res) {
   const data = await res.json();
   if (res.ok) {
     return data;
   } else {
-    throw { name: 'servicesError', message: data };
+    throw { name: "servicesError", message: data };
   }
 }
 
@@ -18,12 +18,12 @@ export default class ExternalServices {
 
   async checkout(form) {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
     };
 
     const response = await fetch(checkoutURL, options).then(convertToJson);
@@ -66,11 +66,11 @@ export default class ExternalServices {
   async loginRequest(credentials) {
     try {
       const response = await fetch(`${baseURL}login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(credentials),
       });
 
       const responseConvertedToJson = await convertToJson(response);
@@ -78,18 +78,21 @@ export default class ExternalServices {
       return responseConvertedToJson;
     } catch (error) {
       console.log(
-        '🚀 ~ file: ExternalServices.mjs:70 ~ ExternalServices ~ login ~ error:',
+        "🚀 ~ file: ExternalServices.mjs:70 ~ ExternalServices ~ login ~ error:",
         error
       );
     }
   }
-  async grabOrders(token){
-    let response = await fetch(`http://server-nodejs.cit.byui.edu:3000/orders`,{
-      method:"GET",
-      headers: {
-        'Authorization': `Bearer ${token}`
-      } 
-    });
+  async grabOrders(token) {
+    let response = await fetch(
+      `http://server-nodejs.cit.byui.edu:3000/orders`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     let myJSON = await response.json();
     return myJSON;
   }
