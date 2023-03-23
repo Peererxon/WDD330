@@ -1,24 +1,24 @@
-document.querySelector('#registerForm').addEventListener('submit', (e) => {
+document.querySelector("#registerForm").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const name = document.querySelector('#name').value;
-  const address = document.querySelector('#address').value;
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#password').value;
+  const name = document.querySelector("#name").value;
+  const address = document.querySelector("#address").value;
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
 
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
-    body: JSON.stringify({ name, address, email, password })
+    body: JSON.stringify({ name, address, email, password }),
   };
 
-  fetch('http://server-nodejs.cit.byui.edu:3000/users', options)
+  fetch("https://wdd330-backend.onrender.com/users", options)
     .then((response) => response.json())
     .then((response) => {
-      if ('message' in response) {
+      if ("message" in response) {
         alert(response.message);
       }
     });

@@ -1,5 +1,5 @@
-import Alert from './alert.mjs';
-import ProductDetailsModal from './ProductDetailsModal.mjs';
+import Alert from "./alert.mjs";
+import ProductDetailsModal from "./ProductDetailsModal.mjs";
 
 // wrapper for querySelector...returns matching element
 
@@ -20,11 +20,11 @@ export function setLocalStorage(key, data) {
 // set a listener for both touchend and click
 
 export function setClick(selector, callback) {
-  qs(selector).addEventListener('touchend', (event) => {
+  qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener('click', callback);
+  qs(selector).addEventListener("click", callback);
 }
 
 export function getParams(param) {
@@ -38,26 +38,26 @@ export function renderListWithTemplate(
   templateFn,
   parentElement,
   list,
-  position = 'afterbegin',
+  position = "afterbegin",
   clear = false
 ) {
   const ListArrayHtml = list.map(templateFn);
   if (clear) {
-    parentElement.innerHTML = '';
+    parentElement.innerHTML = "";
   } else {
-    parentElement.insertAdjacentHTML(position, ListArrayHtml.join(''));
+    parentElement.insertAdjacentHTML(position, ListArrayHtml.join(""));
   }
   // Setting click event to trigger quick lookup modal
-  const buttons = document.querySelectorAll('.quick-button');
+  const buttons = document.querySelectorAll(".quick-button");
 
   const buttonsArrayLenght = buttons.length;
 
   for (let index = 0; index < buttonsArrayLenght; index++) {
-    buttons[index].addEventListener('click', async () => {
-      const productId = buttons[index].getAttribute('data-src');
+    buttons[index].addEventListener("click", async () => {
+      const productId = buttons[index].getAttribute("data-src");
 
       const response = await fetch(
-        `http://server-nodejs.cit.byui.edu:3000/product/${productId}`
+        `https://wdd330-backend.onrender.com/product/${productId}`
       );
 
       const product = await response.json();
@@ -65,22 +65,22 @@ export function renderListWithTemplate(
       const p = new ProductDetailsModal(product.Result);
 
       document
-        .querySelector('#quickLookupModal')
-        .classList.remove('hide-modal');
+        .querySelector("#quickLookupModal")
+        .classList.remove("hide-modal");
 
       p.renderProductDetails();
     });
   }
 
-  const closeModalButton = document.querySelector('#modalButton');
+  const closeModalButton = document.querySelector("#modalButton");
 
-  closeModalButton.addEventListener('click', () => {
-    document.querySelector('#quickLookupModal').classList.add('hide-modal');
+  closeModalButton.addEventListener("click", () => {
+    document.querySelector("#quickLookupModal").classList.add("hide-modal");
   });
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.insertAdjacentHTML('afterbegin', template);
+  parentElement.insertAdjacentHTML("afterbegin", template);
   if (callback) {
     callback(data);
   }
@@ -92,15 +92,15 @@ export async function loadTemplate(path) {
     let text = await response.text();
     return text;
   } else {
-    throw new Error('Failed to load path.');
+    throw new Error("Failed to load path.");
   }
 }
 
 export async function loadHeaderFooter() {
-  let headerContent = await loadTemplate('/partials/header.html');
-  let footerContent = await loadTemplate('/partials/footer.html');
-  let headerElement = document.querySelector('header');
-  let footerElement = document.querySelector('footer');
+  let headerContent = await loadTemplate("/partials/header.html");
+  let footerContent = await loadTemplate("/partials/footer.html");
+  let headerElement = document.querySelector("header");
+  let footerElement = document.querySelector("footer");
   renderWithTemplate(headerContent, headerElement);
   renderWithTemplate(footerContent, footerElement);
   showCartQuantity();
@@ -110,11 +110,11 @@ export async function loadHeaderFooter() {
 // in the cart to the backpack icon.
 
 export function showCartQuantity() {
-  let new_cart = getLocalStorage('so-cart');
+  let new_cart = getLocalStorage("so-cart");
 
   // select the div element I (prince) added to the all the html docs.
 
-  let cartQuantityElement = document.querySelector('#cart-items-number');
+  let cartQuantityElement = document.querySelector("#cart-items-number");
 
   // Set the superscript to the number of items in the cart 'IF'there is an item in the cart.
 
@@ -124,9 +124,9 @@ export function showCartQuantity() {
       quantity += new_cart[i].Quantity;
     }
     cartQuantityElement.textContent = quantity;
-    cartQuantityElement.style.display = 'block';
+    cartQuantityElement.style.display = "block";
   } else {
-    cartQuantityElement.style.display = 'none';
+    cartQuantityElement.style.display = "none";
   }
 }
 
@@ -140,7 +140,7 @@ export function alertMessage(message, scroll = true) {
 
 export function initCarousel() {
   // Select all slides
-  const slides = document.querySelectorAll('.slide');
+  const slides = document.querySelectorAll(".slide");
 
   // Validation to check to product that doesn't have extra images
   if (slides) {
@@ -150,7 +150,7 @@ export function initCarousel() {
     });
 
     // select next slide button
-    const nextSlide = document.querySelector('.btn-next');
+    const nextSlide = document.querySelector(".btn-next");
 
     // current slide counter
     let curSlide = 0;
@@ -158,7 +158,7 @@ export function initCarousel() {
     let maxSlide = slides.length - 1;
 
     // add event listener and navigation functionality
-    nextSlide.addEventListener('click', function () {
+    nextSlide.addEventListener("click", function () {
       // check if current slide is the last and reset current slide
       if (curSlide === maxSlide) {
         curSlide = 0;
@@ -173,10 +173,10 @@ export function initCarousel() {
     });
 
     // select next slide button
-    const prevSlide = document.querySelector('.btn-prev');
+    const prevSlide = document.querySelector(".btn-prev");
 
     // add event listener and navigation functionality
-    prevSlide.addEventListener('click', function () {
+    prevSlide.addEventListener("click", function () {
       // check if current slide is the first and reset current slide to last
       if (curSlide === 0) {
         curSlide = maxSlide;
